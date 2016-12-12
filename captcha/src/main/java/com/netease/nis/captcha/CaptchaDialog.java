@@ -16,7 +16,7 @@ import android.view.Window;
  */
 
 public class CaptchaDialog extends Dialog {
-    private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/mobile.jsp";
+    private static final String baseURL = "http://10.240.132.62:8083/test/mobile.jsp";
     //    private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/drag.jsp";
     private CaptchaWebView dwebview = null;
     private CaptchaListener dcaListener = null;
@@ -115,6 +115,7 @@ public class CaptchaDialog extends Dialog {
         if (dwebview == null) {
             dwebview = new CaptchaWebView(dcontext, dcaListener, this);
         }
+        // Log.i("setWebView", "dWidth=  " + dWidth + ", dScale = " + dScale);
         StringBuffer sburl = new StringBuffer();
         sburl.append(baseURL);
         sburl.append("?captchaId=" + this.dCaptchaId);

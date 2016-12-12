@@ -160,9 +160,9 @@ public class LoginActivity extends AppCompatActivity{
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         signInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailView.setText("demo");
+        mEmailView.setText("captcha@dun.163.com");
         mEmailView.setInputType(InputType.TYPE_NULL);
-        mPasswordView.setText("mypassword1");
+        mPasswordView.setText("********");
         mPasswordView.setInputType(InputType.TYPE_NULL);
     }
 
