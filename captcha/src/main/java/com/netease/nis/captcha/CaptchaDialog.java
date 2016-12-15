@@ -16,7 +16,6 @@ import android.view.Window;
  */
 
 public class CaptchaDialog extends Dialog {
-//    private static final String baseURL = "http://10.240.132.62:8083/test/mobile.jsp";
     private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/mobile.jsp";
     //    private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/drag.jsp";
     private CaptchaWebView dwebview = null;
@@ -60,7 +59,7 @@ public class CaptchaDialog extends Dialog {
         return this;
     }
 
-    private String getDeviceId() {
+    private  String getDeviceId() {
 
         try {
             if (this.dDeviceId.equals("")) {
@@ -98,13 +97,13 @@ public class CaptchaDialog extends Dialog {
             float scale = metrics.density;
             dScale = scale;
 
-            final int WIDTH = 320;// 组件的理想宽度
+            final int WIDTH = 290;
             if (height < width) {
                 width = height * 3 / 4;
             }
-            width = width * 4 / 5; // 尝试使用屏幕尺寸的80%作为宽度
-            if ((int) (width / scale) < WIDTH) {
-                width = (int) (WIDTH * scale); // 为避免组件太小，还是使用组件的理想宽度
+            width = width * 4 / 5;
+            if ((int) (width / scale + 0.5f) < WIDTH) {
+                width = (int) ((WIDTH - 0.5f) * scale);
             }
             dWidth = width;
         } catch (Exception e) {
@@ -116,7 +115,6 @@ public class CaptchaDialog extends Dialog {
         if (dwebview == null) {
             dwebview = new CaptchaWebView(dcontext, dcaListener, this);
         }
-        // Log.i("setWebView", "dWidth=  " + dWidth + ", dScale = " + dScale);
         StringBuffer sburl = new StringBuffer();
         sburl.append(baseURL);
         sburl.append("?captchaId=" + this.dCaptchaId);
@@ -126,7 +124,7 @@ public class CaptchaDialog extends Dialog {
         sburl.append("&sdkVer=" + Captcha.SDKVER);
         sburl.append("&title=" + this.dTitle);
         sburl.append("&debug=" + this.debug);
-        sburl.append("&width=" + (int) (dWidth / dScale ));
+        sburl.append("&width=" + (int) (dWidth / dScale + 1.5f));
         String requrl = sburl.toString();
         Log.d(Captcha.TAG, "url: " + requrl);
         dwebview.addJavascriptInterface(new JSInterface(dcontext, dcaListener, this), "JSInterface");

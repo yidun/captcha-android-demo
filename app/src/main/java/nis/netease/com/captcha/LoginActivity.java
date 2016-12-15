@@ -69,36 +69,41 @@ public class LoginActivity extends AppCompatActivity{
             progressDialog.dismiss();
             if (status) {
                 //加载完成
-                toastMsg("load finished");
+                toastMsg("加载完成");
             }else {
                 //加载超时,可能是加载时网络出错等原因
-                toastMsg("validate timeout");
+                toastMsg("加载超时，可能是网络错误");
             }
         }
 
         @Override
         public void onValidate(String result, String validate, String message) {
             //验证结果，valiadte，可以根据返回的三个值进行用户自定义二次验证
-            toastLongTimeMsg("result = " + result + ", validate = " + validate + ", message = " + message);
+            if(validate.length()>0){
+                toastMsg("验证成功，validate = "+validate);
+            }else{
+                toastMsg("验证失败：result = " + result + ", validate = " + validate + ", message = " + message);
+
+            }
         }
 
         @Override
         public void closeWindow() {
             //请求关闭页面
-            toastMsg("close windows");
+            toastMsg("关闭页面");
         }
 
         @Override
         public void onError(String errormsg) {
             //出错
             progressDialog.dismiss();
-            toastLongTimeMsg("error");
+            toastLongTimeMsg("出错");
         }
 
         @Override
         public void onCancel() {
             //用户取消验证
-            toastMsg("user cancel");
+            toastMsg("用户取消验证");
         }
     };
 
@@ -113,7 +118,7 @@ public class LoginActivity extends AppCompatActivity{
             progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    toastMsg("user cancel progress dialog");
+                    toastMsg("用户关闭Loading条（与验证码SDK无关）");
                     if (mLoginTask.getStatus() == AsyncTask.Status.RUNNING) {
                         Log.i(TAG, "stop mLoginTask");
                         mLoginTask.cancel(true);
@@ -145,7 +150,7 @@ public class LoginActivity extends AppCompatActivity{
                 //开始验证
                 captcha.Validate();
             } else {
-                toastMsg("captcha check params wrong");
+                toastMsg("验证码SDK参数设置错误");
             }
         }
 
@@ -160,9 +165,9 @@ public class LoginActivity extends AppCompatActivity{
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         signInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailView.setText("captcha@dun.163.com");
+        mEmailView.setText("demo");
         mEmailView.setInputType(InputType.TYPE_NULL);
-        mPasswordView.setText("********");
+        mPasswordView.setText("mypassword1");
         mPasswordView.setInputType(InputType.TYPE_NULL);
     }
 
