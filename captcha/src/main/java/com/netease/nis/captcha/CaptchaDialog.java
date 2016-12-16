@@ -97,13 +97,13 @@ public class CaptchaDialog extends Dialog {
             float scale = metrics.density;
             dScale = scale;
 
-            final int WIDTH = 290;
+            final int WIDTH = 320; // 组件的理想宽度
             if (height < width) {
                 width = height * 3 / 4;
             }
             width = width * 4 / 5;
-            if ((int) (width / scale + 0.5f) < WIDTH) {
-                width = (int) ((WIDTH - 0.5f) * scale);
+            if ((int) (width / scale) < WIDTH) {
+                width = (int) (WIDTH * scale);
             }
             dWidth = width;
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class CaptchaDialog extends Dialog {
         sburl.append("&sdkVer=" + Captcha.SDKVER);
         sburl.append("&title=" + this.dTitle);
         sburl.append("&debug=" + this.debug);
-        sburl.append("&width=" + (int) (dWidth / dScale + 1.5f));
+        sburl.append("&width=" + (int) (dWidth / dScale));
         String requrl = sburl.toString();
         Log.d(Captcha.TAG, "url: " + requrl);
         dwebview.addJavascriptInterface(new JSInterface(dcontext, dcaListener, this), "JSInterface");
