@@ -1,10 +1,16 @@
 package com.netease.nis.captcha;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.net.http.SslError;
 import android.util.Log;
 import android.view.View;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -29,17 +35,20 @@ public class CaptchaWebView extends WebView {
     private int mTimeout = 10000;
     private boolean debug = false;
     private WebViewClientBase mWebViewClientBase = null;
+    private WebChromeClient mWebChromeClient = null;
+
     //定时操作线程池
     private ScheduledExecutorService scheduledExecutorService = null;
+
     public CaptchaWebView(Context context, CaptchaListener captchaListener, CaptchaDialog captchaDialog) {
         super(context);
         this.context = context;
         this.captchaDialog = captchaDialog;
         this.captchaListener = captchaListener;
         this.debug = captchaDialog.isDebug();
-        mWebViewClientBase = new WebViewClientBase();
+        this.mWebViewClientBase = new WebViewClientBase();
+        this.mWebChromeClient = new WebChromeClientBase();
         setWebView();
-
     }
 
     private void setWebView() {
@@ -53,10 +62,31 @@ public class CaptchaWebView extends WebView {
         this.setHorizontalScrollBarEnabled(false);
         this.setVerticalScrollBarEnabled(false);
         this.setWebViewClient(mWebViewClientBase);
+        this.setWebChromeClient(mWebChromeClient);
         this.onResume();
     }
 
+    private class WebChromeClientBase extends WebChromeClient {
+
+        @Override
+        public void onCloseWindow(WebView window) {
+            captchaDialog.cancel();
+            super.onCloseWindow(window);
+        }
+    }
+
     private class WebViewClientBase extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            // TODO Auto-generated method stub
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            context.startActivity(intent);
+
+            return true;
+        }
+
 
         @Override
         public void onPageStarted(final WebView view, String url, Bitmap favicon) {
@@ -72,6 +102,7 @@ public class CaptchaWebView extends WebView {
                                 webView.stopLoading();
                                 captchaDialog.dismiss();
                                 if (captchaListener != null) {
+                                    Log.d(Captcha.TAG, "time out 2");
                                     captchaListener.onReady(false);
                                 }
                             }
@@ -79,7 +110,7 @@ public class CaptchaWebView extends WebView {
                     });
                 }
             };
-            if(scheduledExecutorService == null){
+            if (scheduledExecutorService == null) {
                 scheduledExecutorService = Executors.newScheduledThreadPool(2);
             }
 
@@ -88,36 +119,65 @@ public class CaptchaWebView extends WebView {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            Log.i(Captcha.TAG, "webview did Finished");
-            if(scheduledExecutorService!=null){
-               if(!scheduledExecutorService.isShutdown())
-                   scheduledExecutorService.shutdown();
-            }
-          if (debug) {
-                if (captchaListener != null) {
-                    captchaListener.onReady(false);
+
+            if (captchaDialog.isShowing()) {
+                if (scheduledExecutorService != null) {
+                    if (!scheduledExecutorService.isShutdown())
+                        scheduledExecutorService.shutdown();
                 }
-                captchaDialog.show();
+                Log.i(Captcha.TAG, "webview did Finished");
             }
             super.onPageFinished(view, url);
         }
 
+        @SuppressWarnings("deprecation")
         @Override
-        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-            if (captchaListener != null) {
-                captchaListener.onReady(false);
+        public void onReceivedError(WebView view, int errorCode,
+                                    String description, String failingUrl) {
+            if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_FILE_NOT_FOUND) {
+                captchaListener.onError("error" + "ERROR_FILE_NOT_FOUND" + errorCode);
             }
-            super.onReceivedError(view, request, error);
+            captchaDialog.show();
+            super.onReceivedError(view, errorCode, description, failingUrl);
+        }
+
+
+        @TargetApi(android.os.Build.VERSION_CODES.M)
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
+            // Redirect to deprecated method, so you can use it in all SDK versions
+            captchaListener.onError(req.toString() + rerr.toString());
+            if (captchaDialog.getProgressDialog() != null) {
+                captchaDialog.getProgressDialog().dismiss();
+            }
+            captchaDialog.show();
+            super.onReceivedError(view, req, rerr);
         }
 
         @Override
         public void onReceivedHttpError(
                 WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+            Log.d(Captcha.TAG, request.toString() + errorResponse.toString());
             if (captchaListener != null) {
-                captchaListener.onReady(false);
+                Log.d(Captcha.TAG, "onReceivedHttpError ");
+            }
+            if (captchaDialog.getProgressDialog() != null) {
+                captchaDialog.getProgressDialog().dismiss();
             }
             captchaDialog.show();
             super.onReceivedHttpError(view, request, errorResponse);
+        }
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            if (captchaListener != null) {
+                Log.d(Captcha.TAG, "onReceivedHttpError ");
+            }
+            if (captchaDialog.getProgressDialog() != null) {
+                captchaDialog.getProgressDialog().dismiss();
+            }
+            captchaDialog.show();
+            super.onReceivedSslError(view, handler, error);
         }
     }
 

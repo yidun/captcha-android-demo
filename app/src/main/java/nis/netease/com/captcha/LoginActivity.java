@@ -1,9 +1,7 @@
 package nis.netease.com.captcha;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -42,20 +40,28 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         setLoginView();
 
-
         String testCaptchaId = "ede087b9bdb0447e8ef64655785aab49";
 
-        //初始化验证码SDK，并设置CaptchaId、Listener
+        //初始化验证码SDK相关参数，设置CaptchaId、Listener最后调用start初始化。
         if (captcha==null){
             captcha = new Captcha(mcontext);
         }
         captcha.setCaptchaId(testCaptchaId);
         captcha.setCaListener(mytestCaListener);
-        //登陆按钮
+        //可选：开启debug
+        captcha.setDebug(false);
+
+        //登陆操作
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                mLoginTask = new UserLoginTask();
+                //关闭mLoginTask任务可以放在mytestCaListener的onCancel接口中处理
+                mLoginTask.execute();
+                //必需：初始化 captcha框架
+                captcha.start();
+                //可直接调用验证函数Validate()，本demo采取在异步任务中调用（见UserLoginTask类中）
+               //captcha.Validate();
             }
         });
 
@@ -63,18 +69,6 @@ public class LoginActivity extends AppCompatActivity{
 
     //自定义Listener格式如下
     CaptchaListener mytestCaListener  = new CaptchaListener() {
-        @Override
-        public void onReady(Boolean status) {
-            //加载完成
-            progressDialog.dismiss();
-            if (status) {
-                //加载完成
-                toastMsg("加载完成");
-            }else {
-                //加载超时,可能是加载时网络出错等原因
-                toastMsg("加载超时，可能是网络错误");
-            }
-        }
 
         @Override
         public void onValidate(String result, String validate, String message) {
@@ -96,37 +90,30 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         public void onError(String errormsg) {
             //出错
-            progressDialog.dismiss();
-            toastLongTimeMsg("出错");
+            toastMsg("错误信息："+errormsg);
         }
 
         @Override
         public void onCancel() {
-            //用户取消验证
-            toastMsg("用户取消验证");
-        }
-    };
-
-    //登陆操作
-    private void attemptLogin() {
-
-        mLoginTask = new UserLoginTask();
-        mLoginTask.execute();
-        if (!((Activity) mcontext).isFinishing()) {
-            //渲染Loading
-            progressDialog = ProgressDialog.show(mcontext, null, "Loading", true, true);
-            progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    toastMsg("用户关闭Loading条（与验证码SDK无关）");
-                    if (mLoginTask.getStatus() == AsyncTask.Status.RUNNING) {
-                        Log.i(TAG, "stop mLoginTask");
-                        mLoginTask.cancel(true);
-                    }
+            toastMsg("取消线程");
+            //用户取消加载或者用户取消验证，关闭异步任务
+            if(mLoginTask!=null){
+                if (mLoginTask.getStatus() == AsyncTask.Status.RUNNING) {
+                    Log.i(TAG, "stop mLoginTask");
+                    mLoginTask.cancel(true);
                 }
-            });
+            }
         }
-    }
+
+        @Override
+        public void onReady(boolean ret) {
+            //该为调试接口，ret为true表示加载Sdk完成
+            if(ret){
+                toastMsg("验证码sdk加载成功");
+            }
+        }
+
+    };
 
 
     /**
@@ -140,17 +127,17 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            //简单验证DeviceId、CaptchaId、Listener值
+            //可选：简单验证DeviceId、CaptchaId、Listener值
             return captcha.checkParams();
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
             if (success) {
-                //开始验证
+                //必需：开始验证
                 captcha.Validate();
             } else {
-                toastMsg("验证码SDK参数设置错误");
+                toastMsg("验证码SDK参数设置错误,请检查配置");
             }
         }
 
@@ -173,10 +160,6 @@ public class LoginActivity extends AppCompatActivity{
 
     private void toastMsg(String msg) {
         Toast.makeText(getBaseContext(), msg, Toast.LENGTH_SHORT).show();
-    }
-
-    private void toastLongTimeMsg(String msg) {
-        Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
     }
 }
 

@@ -6,8 +6,9 @@ package com.netease.nis.captcha;
  */
 
 public interface CaptchaListener {
-    //通知验证已准备完毕
-    void onReady(Boolean status); // true准备完成/false未准备完成
+
+    //调试用
+    void onReady(boolean ret);
 
     //通知native关闭验证
     void closeWindow();

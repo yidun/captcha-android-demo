@@ -1,6 +1,7 @@
 package com.netease.nis.captcha;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.Window;
  */
 
 public class CaptchaDialog extends Dialog {
+
     private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/mobile.jsp";
     //    private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/drag.jsp";
     private CaptchaWebView dwebview = null;
@@ -28,6 +30,7 @@ public class CaptchaDialog extends Dialog {
     private float dScale;
     private boolean debug = false;
     private boolean isShowing = false;
+    private ProgressDialog progressDialog = null;
 
     public CaptchaDialog(Context context) {
         super(context);
@@ -59,7 +62,7 @@ public class CaptchaDialog extends Dialog {
         return this;
     }
 
-    private  String getDeviceId() {
+    private String getDeviceId() {
 
         try {
             if (this.dDeviceId.equals("")) {
@@ -79,8 +82,19 @@ public class CaptchaDialog extends Dialog {
         return this;
     }
 
+    public ProgressDialog getProgressDialog() {
+        return this.progressDialog;
+    }
+
+    public CaptchaDialog setProgressDialog(ProgressDialog progressDialog) {
+        if (this.progressDialog == null && progressDialog != null) {
+            this.progressDialog = progressDialog;
+        }
+        return this;
+    }
+
     public boolean isShowing() {
-        return this.isShowing();
+        return this.isShowing;
     }
 
     public void initDialog() {
@@ -150,6 +164,9 @@ public class CaptchaDialog extends Dialog {
     @Override
     public void show() {
         isShowing = true;
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
         super.show();
     }
 
@@ -163,5 +180,6 @@ public class CaptchaDialog extends Dialog {
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
     }
+
 
 }

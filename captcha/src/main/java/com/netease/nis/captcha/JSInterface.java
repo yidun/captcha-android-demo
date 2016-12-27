@@ -30,7 +30,7 @@ public class JSInterface {
     @JavascriptInterface
     public void onValidate(String result, String validate, String message) {
         Log.i(Captcha.TAG, "result = " + result + ", validate = " + validate + ", message = " + message);
-        if(validate!=null&&validate.length()>0){
+        if (validate != null && validate.length() > 0) {
             captchaDialog.dismiss();
         }
         if (captchaListener != null) {
@@ -47,6 +47,9 @@ public class JSInterface {
         if (captchaListener != null) {
             captchaListener.closeWindow();
         }
+        if (captchaDialog.getProgressDialog() != null) {
+            captchaDialog.getProgressDialog().dismiss();
+        }
     }
 
     /**
@@ -55,15 +58,18 @@ public class JSInterface {
     @JavascriptInterface
     public void onReady() {
         ((Activity) context).runOnUiThread(new Runnable() {
-
             @Override
             public void run() {
-                captchaDialog.show();
+                if (!captchaDialog.isShowing())
+                    captchaDialog.show();
             }
         });
 
         if (captchaListener != null) {
             captchaListener.onReady(true);
+        }
+        if (captchaDialog.getProgressDialog() != null) {
+            captchaDialog.getProgressDialog().dismiss();
         }
     }
 
@@ -75,6 +81,9 @@ public class JSInterface {
         captchaDialog.dismiss();
         if (captchaListener != null) {
             captchaListener.onError(msg);
+        }
+        if (captchaDialog.getProgressDialog() != null) {
+            captchaDialog.getProgressDialog().dismiss();
         }
     }
 }
