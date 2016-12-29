@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         setLoginView();
 
-        String testCaptchaId = "ede087b9bdb0447e8ef64655785aab49";
+        String testCaptchaId = "0489d7c00eff49089c56dfcd4b67f250"; // TODO: 这里填入从易盾官网申请到的验证码id
 
         //初始化验证码SDK相关参数，设置CaptchaId、Listener最后调用start初始化。
         if (captcha==null){

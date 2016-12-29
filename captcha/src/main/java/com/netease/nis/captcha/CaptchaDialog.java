@@ -18,8 +18,7 @@ import android.view.Window;
 
 public class CaptchaDialog extends Dialog {
 
-    private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/mobile.jsp";
-    //    private static final String baseURL = "http://nctest-captcha.nis.netease.com/test/drag.jsp";
+    private static final String baseURL = "https://c.dun.163yun.com/api/v1/mobile.html";
     private CaptchaWebView dwebview = null;
     private CaptchaListener dcaListener = null;
     private Context dcontext = null;
