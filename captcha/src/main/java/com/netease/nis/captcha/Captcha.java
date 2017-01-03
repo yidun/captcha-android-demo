@@ -102,7 +102,12 @@ public class Captcha {
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
-
+    public void setTimeout(int timeout){
+        this.mTimeout = timeout;
+    }
+    public int getTimeout(){
+        return this.mTimeout;
+    }
     public boolean checkParams() {
         boolean ret = false;
         ret = isValid(captchaId) && (caListener != null);

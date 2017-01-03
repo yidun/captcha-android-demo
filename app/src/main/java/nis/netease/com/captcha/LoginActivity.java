@@ -50,7 +50,8 @@ public class LoginActivity extends AppCompatActivity{
         captcha.setCaListener(mytestCaListener);
         //可选：开启debug
         captcha.setDebug(false);
-
+        //可选：设置超时时间
+        captcha.setTimeout(10000);
         //登陆操作
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity{
                 mLoginTask = new UserLoginTask();
                 //关闭mLoginTask任务可以放在mytestCaListener的onCancel接口中处理
                 mLoginTask.execute();
-                //必需：初始化 captcha框架
+                //必填：初始化 captcha框架
                 captcha.start();
                 //可直接调用验证函数Validate()，本demo采取在异步任务中调用（见UserLoginTask类中）
                //captcha.Validate();
@@ -96,7 +97,7 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         public void onCancel() {
             toastMsg("取消线程");
-            //用户取消加载或者用户取消验证，关闭异步任务
+            //用户取消加载或者用户取消验证，关闭异步任务，也可根据情况在其他地方添加关闭异步任务接口
             if(mLoginTask!=null){
                 if (mLoginTask.getStatus() == AsyncTask.Status.RUNNING) {
                     Log.i(TAG, "stop mLoginTask");
@@ -134,7 +135,7 @@ public class LoginActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(final Boolean success) {
             if (success) {
-                //必需：开始验证
+                //必填：开始验证
                 captcha.Validate();
             } else {
                 toastMsg("验证码SDK参数设置错误,请检查配置");
