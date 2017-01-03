@@ -110,7 +110,7 @@ public class CaptchaDialog extends Dialog {
             float scale = metrics.density;
             dScale = scale;
 
-            final int WIDTH = 320; // 组件的理想宽度
+            final int WIDTH = 270; // 组件的最小宽度
             if (height < width) {
                 width = height * 3 / 4;
             }
