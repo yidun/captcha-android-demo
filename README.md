@@ -1,16 +1,7 @@
-﻿# 易盾验证码Android SDK接入指南
+# 易盾验证码Android SDK接入指南
 
 ## 一、SDK集成
-### 1、自动导入（推荐）
-在Module的build.gradle文件中添加依赖和属性配置：
-```
-dependencies {
-    compile xxxxxxx //如果指定版本号升级版本后请clean下工程
-}
-```
-
-### 2、手动导入
-直接将jar包导入到工程目录下
+GitHub上下载源码集成并修改。
 
 ## 二、SDK接口
 ```
