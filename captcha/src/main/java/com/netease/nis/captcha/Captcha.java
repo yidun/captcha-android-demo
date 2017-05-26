@@ -129,6 +129,7 @@ public class Captcha {
                     .setCaptchaId(captchaId)
                     .setCaListener(caListener)
                     .setProgressDialog(progressDialog);
+            captchaDialog.setCanceledOnTouchOutside(false);
             captchaDialog.initDialog();
             captchaDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
