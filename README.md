@@ -1,7 +1,38 @@
-# 易盾验证码Android SDK接入指南
+﻿# 易盾验证码Android SDK接入指南
 
 ## 一、SDK集成
-GitHub上下载源码集成并修改。
+### 1、JitPack方式集成（推荐）
+在AndroidStudio工程的build.grade里添加：
+```
+maven { url "https://jitpack.io" }
+```
+示例：
+```
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+然后在模块的build.gradle中的dependencies添加：
+```
+compile 'com.github.yidun:captcha-android-demo:v1.3'
+```
+示例：
+
+```
+dependencies {
+    compile 'com.github.yidun:captcha-android-demo:v1.3'
+}
+```
+
+最新SDK版本通过JitPack官网查询：[点击链接查看](https://jitpack.io/#yidun/captcha-android-demo)
+
+
+
+### 2、源码方式集成
+GitHub上下载源码集成并修改：[GitHub源码地址](https://github.com/yidun/captcha-android-demo)
 
 ## 二、SDK接口
 ```
