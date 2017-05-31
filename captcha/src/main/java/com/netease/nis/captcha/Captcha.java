@@ -121,7 +121,7 @@ public class Captcha {
         return ret;
     }
 
-    private boolean initDiolog() {
+    private boolean initDialog() {
         try{
             captchaDialog = new CaptchaDialog(context)
                     .setDebug(debug)
@@ -153,7 +153,8 @@ public class Captcha {
         Log.d(TAG, "setSchedule start");
         MyTask timerTask = new MyTask(type, p);
         timer = new Timer();
-        timer.schedule(timerTask, timeout, 1);
+        //timer.schedule(timerTask, timeout, 1);
+        timer.schedule(timerTask, timeout);
     }
 
     public void start() {
@@ -209,7 +210,7 @@ public class Captcha {
                     setSchedule(NONETWROK, progressDialog, 500);
                 } else {
 
-                    initDiolog();
+                    initDialog();
                 }
             }
         } catch (Exception e) {
