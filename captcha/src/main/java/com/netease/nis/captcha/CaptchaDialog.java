@@ -98,11 +98,11 @@ public class CaptchaDialog extends Dialog {
 
     public void initDialog() {
         Log.d(Captcha.TAG, "start init dialog");
-        getDilogWidth();
+        getDialogWidth();
         setWebView();
     }
 
-    private void getDilogWidth() {
+    private void getDialogWidth() {
         try {
             DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
             int width = metrics.widthPixels;
@@ -120,7 +120,7 @@ public class CaptchaDialog extends Dialog {
             }
             dWidth = width;
         } catch (Exception e) {
-            Log.e(Captcha.TAG, "getDilogWidth failed");
+            Log.e(Captcha.TAG, "getDialogWidth failed");
         }
     }
 
@@ -145,6 +145,14 @@ public class CaptchaDialog extends Dialog {
         dwebview.buildLayer();
     }
 
+    //webview加载完成后，再把进度条关闭
+    public void onPageFinished() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -163,9 +171,9 @@ public class CaptchaDialog extends Dialog {
     @Override
     public void show() {
         isShowing = true;
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
+//        if (progressDialog != null) {
+//            progressDialog.dismiss();
+//        }
         super.show();
     }
 

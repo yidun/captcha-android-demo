@@ -87,7 +87,6 @@ public class CaptchaWebView extends WebView {
             return true;
         }
 
-
         @Override
         public void onPageStarted(final WebView view, String url, Bitmap favicon) {
             Log.i(Captcha.TAG, "webview did start");
@@ -126,9 +125,11 @@ public class CaptchaWebView extends WebView {
                         scheduledExecutorService.shutdown();
                 }
                 Log.i(Captcha.TAG, "webview did Finished");
+                //captchaDialog.onPageFinished();
             }
             super.onPageFinished(view, url);
         }
+
 
         @SuppressWarnings("deprecation")
         @Override
@@ -177,7 +178,9 @@ public class CaptchaWebView extends WebView {
                 captchaDialog.getProgressDialog().dismiss();
             }
             captchaDialog.show();
-            super.onReceivedSslError(view, handler, error);
+            handler.proceed(); //fix for: SSL Error. Failed to validate the certificate chain，不要调用super.xxxx
+            //ref: http://blog.csdn.net/LABLENET/article/details/52683893
+            //super.onReceivedSslError(view, handler, error);
         }
     }
 
