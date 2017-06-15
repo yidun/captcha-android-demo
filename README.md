@@ -63,8 +63,6 @@ Captcha mCaptcha = new Captcha(context);
 /*
 * v2.0测试用id：
 * 拖动 a05f036b70ab447b87cc788af9a60974
-* 点选 d2dec12736264477b1905bebfe657321
-* 短信 3fd5cf9ced2642a19fe8831d1b9821ac
 * */
 mCaptcha.setCaptchaId(captchaid);
 

@@ -85,8 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         /*
         * v2.0
         * 拖动 a05f036b70ab447b87cc788af9a60974
-        * 点选 d2dec12736264477b1905bebfe657321
-        * 短信 3fd5cf9ced2642a19fe8831d1b9821ac
         * */
         String testCaptchaId = "a05f036b70ab447b87cc788af9a60974"; // TODO: 这里填入从易盾官网申请到的验证码id，上面是几种测试风格的id。 0489d7c00eff49089c56dfcd4b67f250
 
