@@ -49,12 +49,23 @@ public void setDebug();
 public boolean checkParams();
 ```
 
+```
+//点击验证码弹框外部是否消失
+captchaDialog.setCanceledOnTouchOutside(false);
+```
+
 ## 三、集成说明
 ### 1、初始化
 ```
 Captcha mCaptcha = new Captcha(context);
 
 //设置CaptchaId：这里填入从易盾官网申请到的验证码id
+/*
+* v2.0测试用id：
+* 拖动 a05f036b70ab447b87cc788af9a60974
+* 点选 d2dec12736264477b1905bebfe657321
+* 短信 3fd5cf9ced2642a19fe8831d1b9821ac
+* */
 mCaptcha.setCaptchaId(captchaid);
 
 //设置监听对象captchaListener
@@ -205,6 +216,53 @@ mCaptcha.start();
 //可直接调用验证函数Validate()，本demo采取在异步任务中调用（见UserLoginTask类中）
 //mCaptcha.Validate();
 ```
+
+## 四、混淆配置
+proguard混淆配置文件增加：
+```
+-keepattributes *Annotation*
+-keep public class com.netease.nis.captcha.**{*;}
+
+-keep public class android.webkit.**
+
+-keepattributes SetJavaScriptEnabled
+-keepattributes JavascriptInterface
+
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+```
+因为DEMO是开源的，如果您把验证码的包名修改掉了，例如改为了：
+```
+com.xxxa.xxxb.captcha
+```
+那么proguard混淆配置文件就需要对应的改为：
+```
+-keep public class com.xxxa.xxxb.captcha.**{*;}
+```
+
+
+
+## 五、常见问题
+### 1、js错误找不到onValidate
+```
+"Uncaught TypeError: JSInterface.onValidate is not a function", source:xxxx
+```
+原因：JSInterface被混淆导致，请参考[混淆配置]keep验证码相关的类。
+
+### 2、验证码加载不出来
+原因1：如果生成出的url地址在电脑上可以访问并正常显示，在手机浏览器上不能访问，而且浏览器显示“您的时钟慢了”，说明手机系统时间与证书时间不匹配。主要出现场景在测试时拿到的手机可能会有问题。
+
+### 3、验证码加载不出来，log输出："Uncaught TypeError: Object [object Object] has no method
+```
+"Uncaught TypeError: Object [object Object] has no method 'onReady'", source:xxxx
+```
+原因：Android4.2之后使用JS接口时必须添加注解 **@JavascriptInterface**，但是有时会被混淆掉，混淆配置添加：
+```
+-keepattributes *Annotation*
+```
+请参考[混淆配置]一节。
+
 
 ## 效果演示
 ### 1、拖动

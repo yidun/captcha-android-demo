@@ -10,3 +10,4 @@
 /captcha/build
 /captures
 .externalNativeBuild
+app/sign.keystore
