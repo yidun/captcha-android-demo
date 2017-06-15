@@ -17,8 +17,6 @@ import android.view.Window;
  */
 
 public class CaptchaDialog extends Dialog {
-
-    private static final String baseURL = "https://c.dun.163yun.com/api/v1/mobile.html";
     private CaptchaWebView dwebview = null;
     private CaptchaListener dcaListener = null;
     private Context dcontext = null;
@@ -129,7 +127,7 @@ public class CaptchaDialog extends Dialog {
             dwebview = new CaptchaWebView(dcontext, dcaListener, this);
         }
         StringBuffer sburl = new StringBuffer();
-        sburl.append(baseURL);
+        sburl.append(Captcha.baseURL);
         sburl.append("?captchaId=" + this.dCaptchaId);
         sburl.append("&deviceId=" + getDeviceId());
         sburl.append("&os=android");

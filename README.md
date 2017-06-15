@@ -207,6 +207,14 @@ mCaptcha.start();
 ```
 
 ## 效果演示
+### 1、拖动
 ![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/Screenshot_1482991322.png)
-![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/Screenshot_1482991359.png)
+![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/style_drag.png)
 ![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/Screenshot_1482991371.png)
+
+### 2、点选
+![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/style_select.png)
+
+### 3、短信
+![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/style_msg.png)
+

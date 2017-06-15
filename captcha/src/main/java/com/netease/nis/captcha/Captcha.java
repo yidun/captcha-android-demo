@@ -21,7 +21,12 @@ import java.util.TimerTask;
 
 public class Captcha {
     public final static String TAG = "myCaptcha";
-    public final static String SDKVER = "1.0.0";
+    public final static String SDKVER = "2.0";
+
+    public static final String baseURL = "https://c.dun.163yun.com/api/v2/mobile.html";
+    //https://c.dun.163yun.com/api/v1/mobile.html
+    //private static final String baseURL = "http://nctest-captcha.nis.netease.com/v2.x/test/mobile.html";
+
     public final static int NONETWROK = 0;
     public final static int INITTIMEOUT = 1;
     public final static int VALIDATETIMEOUT = 2;

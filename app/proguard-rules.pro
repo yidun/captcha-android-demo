@@ -15,3 +15,6 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keepattributes *Annotation*
+-keep public class android.webkit.**
+-keep public class com.netease.nis.captcha.**{*;}
