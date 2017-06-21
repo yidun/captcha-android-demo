@@ -1,5 +1,6 @@
 package nis.netease.com.captcha;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -78,6 +79,11 @@ public class LoginActivity extends AppCompatActivity {
     };
 
     @Override
+    protected Dialog onCreateDialog(int id) {
+        return super.onCreateDialog(id);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -101,6 +107,11 @@ public class LoginActivity extends AppCompatActivity {
         mCaptcha.setDebug(false);
         //可选：设置超时时间
         mCaptcha.setTimeout(10000);
+
+        //设置验证码弹框的纵向坐标位置，默认无须设置为窗口居中。
+        //mCaptcha.setPositionY(200);
+        //设置弹框时背景页面是否模糊，默认无须设置，默认显示弹框时背景页面模糊，Android默认风格。
+        //mCaptcha.setBackgroundDimEnabled(false);
         //登陆操作
         button_login.setOnClickListener(new OnClickListener() {
             @Override

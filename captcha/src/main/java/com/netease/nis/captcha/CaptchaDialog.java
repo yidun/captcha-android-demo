@@ -154,6 +154,9 @@ public class CaptchaDialog extends Dialog {
         dwebview.buildLayer();
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
+        //params.alpha = (float)1.0; //0.0-1.0
+        if (mPositionY != -1) {
+            params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
             params.y = mPositionY;
         }
         getWindow().setAttributes(params);
