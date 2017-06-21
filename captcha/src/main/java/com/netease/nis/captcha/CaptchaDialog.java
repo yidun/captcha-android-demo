@@ -29,7 +29,10 @@ public class CaptchaDialog extends Dialog {
     private float dScale;
     private boolean debug = false;
     private boolean isShowing = false;
+    private int mPositionX = -1;
     private int mPositionY = -1;
+    private int mPositionW = -1;
+    private int mPositionH = -1;
     private ProgressDialog progressDialog = null;
 
     public CaptchaDialog(Context context) {
@@ -41,8 +44,11 @@ public class CaptchaDialog extends Dialog {
         this.dcontext = context;
     }
 
-    public void setPositionY(int y) {
-        mPositionY = y;
+    public void setPosition(int left, int top, int w, int h) {
+        mPositionX = left;
+        mPositionY = top;
+        mPositionW = w;
+        mPositionH = h;
     }
 
     //验证标题, 默认无标题, 不宜过长.
@@ -112,6 +118,8 @@ public class CaptchaDialog extends Dialog {
     }
 
     private void getDialogWidth() {
+
+
         try {
             DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
             int width = metrics.widthPixels;
@@ -119,15 +127,21 @@ public class CaptchaDialog extends Dialog {
             float scale = metrics.density;
             dScale = scale;
 
-            final int WIDTH = 270; // 组件的最小宽度
-            if (height < width) {
-                width = height * 3 / 4;
+            final int MINWIDTH = 270; // 组件的最小宽度
+
+            if (mPositionW > MINWIDTH) {
+                dWidth = mPositionW;
+            } else {
+                if (height < width) {
+                    width = height * 3 / 4;
+                }
+                width = width * 4 / 5;
+                if ((int) (width / scale) < MINWIDTH) {
+                    width = (int) (MINWIDTH * scale);
+                }
+                dWidth = width;
             }
-            width = width * 4 / 5;
-            if ((int) (width / scale) < WIDTH) {
-                width = (int) (WIDTH * scale);
-            }
-            dWidth = width;
+
         } catch (Exception e) {
             Log.e(Captcha.TAG, "getDialogWidth failed");
         }
@@ -155,9 +169,20 @@ public class CaptchaDialog extends Dialog {
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         //params.alpha = (float)1.0; //0.0-1.0
+        if (mPositionX != -1) {
+            params.gravity = Gravity.LEFT;
+//            params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+            params.x = mPositionX;
+        }
         if (mPositionY != -1) {
-            params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+            params.gravity |= Gravity.TOP;
             params.y = mPositionY;
+        }
+        if (mPositionW > 0) {
+            params.width = mPositionW;
+        }
+        if (mPositionH > 0) {
+            params.height = mPositionH;
         }
         getWindow().setAttributes(params);
     }

@@ -43,7 +43,10 @@ public class Captcha {
     public Captcha(Context context) {
         this.context = context;
     }
+    private int mPositionX = -1;
     private int mPositionY = -1;
+    private int mPositionW = -1;
+    private int mPositionH = -1;
     private boolean backgroundDimEnabled = true;
 
     private static boolean isValid(String param) {
@@ -130,8 +133,11 @@ public class Captcha {
         return ret;
     }
 
-    public void setPositionY(int y) {
-        mPositionY = y;
+    public void setPosition(int left, int top, int w, int h) {
+        mPositionX = left;
+        mPositionY = top;
+        mPositionW = w;
+        mPositionH = h;
     }
 
     /**
@@ -149,7 +155,7 @@ public class Captcha {
             }else{
                 captchaDialog = new CaptchaDialog(context, R.style.DialogStyle);
             }
-            captchaDialog.setPositionY(mPositionY);
+            captchaDialog.setPosition(mPositionX, mPositionY, mPositionW, mPositionH);
             captchaDialog.setDebug(debug);
             captchaDialog.setDeviceId(deviceId);
             captchaDialog.setCaptchaId(captchaId);
