@@ -43,6 +43,8 @@ public class Captcha {
     public Captcha(Context context) {
         this.context = context;
     }
+    private int mPositionY = -1;
+    private boolean backgroundDimEnabled = true;
 
     private static boolean isValid(String param) {
         return (param != null) && (param.length() > 0);
@@ -75,6 +77,8 @@ public class Captcha {
         }
         return false;
     }
+
+
 
     public String getDeviceId() {
         return this.deviceId;
@@ -126,14 +130,31 @@ public class Captcha {
         return ret;
     }
 
+    public void setPositionY(int y) {
+        mPositionY = y;
+    }
+
+    /**
+     * 设置弹框时背景页面是否模糊，默认为模糊，也是Android的默认风格。
+     * @param dimEnabled，true：模糊（默认风格），false：不模糊
+     */
+    public void setBackgroundDimEnabled(boolean dimEnabled){
+        backgroundDimEnabled = dimEnabled;
+    }
+
     private boolean initDialog() {
         try{
-            captchaDialog = new CaptchaDialog(context)
-                    .setDebug(debug)
-                    .setDeviceId(deviceId)
-                    .setCaptchaId(captchaId)
-                    .setCaListener(caListener)
-                    .setProgressDialog(progressDialog);
+            if (backgroundDimEnabled) {
+                captchaDialog = new CaptchaDialog(context);
+            }else{
+                captchaDialog = new CaptchaDialog(context, R.style.DialogStyle);
+            }
+            captchaDialog.setPositionY(mPositionY);
+            captchaDialog.setDebug(debug);
+            captchaDialog.setDeviceId(deviceId);
+            captchaDialog.setCaptchaId(captchaId);
+            captchaDialog.setCaListener(caListener);
+            captchaDialog.setProgressDialog(progressDialog);
             captchaDialog.setCanceledOnTouchOutside(false);
             captchaDialog.initDialog();
             captchaDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {

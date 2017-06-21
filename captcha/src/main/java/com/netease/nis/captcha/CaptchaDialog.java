@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * 自定义Dialog 主要用于获取url地址然后加载
@@ -27,11 +29,20 @@ public class CaptchaDialog extends Dialog {
     private float dScale;
     private boolean debug = false;
     private boolean isShowing = false;
+    private int mPositionY = -1;
     private ProgressDialog progressDialog = null;
 
     public CaptchaDialog(Context context) {
         super(context);
         this.dcontext = context;
+    }
+    public CaptchaDialog(Context context, int themeResId) {
+        super(context, R.style.DialogStyle);
+        this.dcontext = context;
+    }
+
+    public void setPositionY(int y) {
+        mPositionY = y;
     }
 
     //验证标题, 默认无标题, 不宜过长.
@@ -141,6 +152,11 @@ public class CaptchaDialog extends Dialog {
         dwebview.addJavascriptInterface(new JSInterface(dcontext, dcaListener, this), "JSInterface");
         dwebview.loadUrl(requrl);
         dwebview.buildLayer();
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.y = mPositionY;
+        }
+        getWindow().setAttributes(params);
     }
 
     //webview加载完成后，再把进度条关闭
@@ -156,11 +172,9 @@ public class CaptchaDialog extends Dialog {
 
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         setContentView(dwebview);
 
         final LayoutParams layoutParams = dwebview.getLayoutParams();
-
         layoutParams.width = dWidth;
         layoutParams.height = LayoutParams.WRAP_CONTENT;
         dwebview.setLayoutParams(layoutParams);
