@@ -48,6 +48,8 @@ public class Captcha {
     private int mPositionW = -1;
     private int mPositionH = -1;
     private boolean backgroundDimEnabled = true;
+    private boolean isCanceledOnTouchOutside = true;
+
 
     private static boolean isValid(String param) {
         return (param != null) && (param.length() > 0);
@@ -148,6 +150,14 @@ public class Captcha {
         backgroundDimEnabled = dimEnabled;
     }
 
+    /**
+     * 设置弹框时点击对话框之外区域是否自动消失，默认为消失
+     * @param canceled：如果设置不自动消失请设置为false
+     */
+    public void setCanceledOnTouchOutside(boolean canceled) {
+        isCanceledOnTouchOutside = canceled;
+    }
+
     private boolean initDialog() {
         try{
             if (backgroundDimEnabled) {
@@ -161,7 +171,7 @@ public class Captcha {
             captchaDialog.setCaptchaId(captchaId);
             captchaDialog.setCaListener(caListener);
             captchaDialog.setProgressDialog(progressDialog);
-            captchaDialog.setCanceledOnTouchOutside(false);
+            captchaDialog.setCanceledOnTouchOutside(isCanceledOnTouchOutside);
             captchaDialog.initDialog();
             captchaDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override

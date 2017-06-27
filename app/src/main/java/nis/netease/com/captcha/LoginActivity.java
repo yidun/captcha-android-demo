@@ -112,6 +112,8 @@ public class LoginActivity extends AppCompatActivity {
         //mCaptcha.setPosition(1, 200, 1040, -1);
         //设置弹框时背景页面是否模糊，默认无须设置，默认显示弹框时背景页面模糊，Android默认风格。
         //mCaptcha.setBackgroundDimEnabled(false);
+        //设置弹框时点击对话框之外区域是否自动消失，默认为消失。如果设置不自动消失请设置为false。
+        //mCaptcha.setCanceledOnTouchOutside(false);
         //登陆操作
         button_login.setOnClickListener(new OnClickListener() {
             @Override
