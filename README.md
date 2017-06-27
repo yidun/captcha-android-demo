@@ -37,21 +37,22 @@ GitHub上下载源码集成并修改：[GitHub源码地址](https://github.com/y
 ## 二、SDK接口
 ```
 //可以自定义deviceid，若不填写则默认获取手机的imei值
-public void setDeviceId();  
+public void setDeviceId(String);  
 
 //可以自定义sdk框架超时时间，单位毫秒，默认是10000即10秒
-public void setTimeout();
+public void setTimeout(int);
 
 //是否开启调试，设置为true后可以看到部分调试信息
-public void setDebug();
+public void setDebug(boolean);
 
 //简单测试是否填写captcha 是否初始化，包括captchaId与设置监听对象
 public boolean checkParams();
-```
 
-```
-//点击验证码弹框外部是否消失
-captchaDialog.setCanceledOnTouchOutside(false);
+//设置弹框时点击对话框之外区域是否自动消失，默认为消失。如果设置不自动消失设为false。
+public void setCanceledOnTouchOutside(boolean);
+
+//设置弹框时背景页面是否模糊，默认为模糊，也是Android的默认风格。true：模糊（默认风格），false：不模糊
+public void setBackgroundDimEnabled(boolean);
 ```
 
 ## 三、集成说明
