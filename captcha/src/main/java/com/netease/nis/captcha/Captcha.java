@@ -277,7 +277,7 @@ public class Captcha {
                 switch (msg.what) {
                     case NONETWROK:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setMessage("无网络，请关闭并检查网络");
+                        mp.setMessage("网络异常，请检查网络后重试");
                         break;
                     case VALIDATETIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
