@@ -281,11 +281,11 @@ public class Captcha {
                         break;
                     case VALIDATETIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setMessage("验证超时，请关闭并检查网络");
+                        mp.setMessage("网络异常，请检查网络后重试");
                         break;
                     case INITTIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setMessage("初始化超时，请关闭并检查网络");
+                        mp.setMessage("网络异常，请检查网络后重试");
                         break;
                     default:
                         break;

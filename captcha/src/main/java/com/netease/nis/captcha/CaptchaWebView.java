@@ -99,7 +99,10 @@ public class CaptchaWebView extends WebView {
                         public void run() {
                             if (webView.getProgress() < 100) {
                                 webView.stopLoading();
-                                captchaDialog.dismiss();
+                                if(webView.getProgress()<40)//如果在弱网情况下出现验证码超时加载不出来，只加载出一个窄条则dismiss
+                                {
+                                    captchaDialog.dismiss();
+                                }
                                 if (captchaListener != null) {
                                     Log.d(Captcha.TAG, "time out 2");
                                     captchaListener.onReady(false);
@@ -118,14 +121,13 @@ public class CaptchaWebView extends WebView {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-
             if (captchaDialog.isShowing()) {
                 if (scheduledExecutorService != null) {
                     if (!scheduledExecutorService.isShutdown())
                         scheduledExecutorService.shutdown();
                 }
                 Log.i(Captcha.TAG, "webview did Finished");
-                //captchaDialog.onPageFinished();
+               // captchaDialog.onPageFinished();
             }
             super.onPageFinished(view, url);
         }
@@ -138,7 +140,7 @@ public class CaptchaWebView extends WebView {
             if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_FILE_NOT_FOUND) {
                 captchaListener.onError("error" + "ERROR_FILE_NOT_FOUND" + errorCode);
             }
-            captchaDialog.show();
+          //  captchaDialog.show();
             super.onReceivedError(view, errorCode, description, failingUrl);
         }
 
@@ -151,7 +153,7 @@ public class CaptchaWebView extends WebView {
             if (captchaDialog.getProgressDialog() != null) {
                 captchaDialog.getProgressDialog().dismiss();
             }
-            captchaDialog.show();
+          //  captchaDialog.show();
             super.onReceivedError(view, req, rerr);
         }
 
@@ -165,7 +167,8 @@ public class CaptchaWebView extends WebView {
             if (captchaDialog.getProgressDialog() != null) {
                 captchaDialog.getProgressDialog().dismiss();
             }
-            captchaDialog.show();
+           // captchaListener.onError("加载出错，请检查网络状况");
+         //   captchaDialog.show();
             super.onReceivedHttpError(view, request, errorResponse);
         }
 
@@ -177,7 +180,7 @@ public class CaptchaWebView extends WebView {
             if (captchaDialog.getProgressDialog() != null) {
                 captchaDialog.getProgressDialog().dismiss();
             }
-            captchaDialog.show();
+           // captchaDialog.show();
             handler.proceed(); //fix for: SSL Error. Failed to validate the certificate chain，不要调用super.xxxx
             //ref: http://blog.csdn.net/LABLENET/article/details/52683893
             //super.onReceivedSslError(view, handler, error);
