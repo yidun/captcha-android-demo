@@ -214,7 +214,8 @@ public class CaptchaDialog extends Dialog {
 //        if (progressDialog != null) {
 //            progressDialog.dismiss();
 //        }
-        super.show();
+        if(dcontext!=null)
+             super.show();
     }
 
     @Override
