@@ -21,12 +21,11 @@ import java.util.TimerTask;
 
 public class Captcha {
     public final static String TAG = "myCaptcha";
-    public final static String SDKVER = "2.0";
+    public final static String SDKVER = "2.4.2";
 
-    public static final String baseURL = "https://c.dun.163yun.com/api/v2/mobile.html";
+    public static final String baseURL = "http://cstaticdun.126.net/api/v2/mobile_2_4_2.html";
     //https://c.dun.163yun.com/api/v1/mobile.html
     //private static final String baseURL = "http://nctest-captcha.nis.netease.com/v2.x/test/mobile.html";
-
     public final static int NONETWROK = 0;
     public final static int INITTIMEOUT = 1;
     public final static int VALIDATETIMEOUT = 2;
@@ -38,18 +37,20 @@ public class Captcha {
     private CaptchaDialog captchaDialog;
     private Handler handler = null;
     private int mTimeout = 10000;
-    private ProgressDialog progressDialog = null;
+    private CaptchaProgressDialog progressDialog = null;
     private Timer timer = null;
+
     public Captcha(Context context) {
         this.context = context;
     }
+
     private int mPositionX = -1;
     private int mPositionY = -1;
     private int mPositionW = -1;
     private int mPositionH = -1;
     private boolean backgroundDimEnabled = true;
     private boolean isCanceledOnTouchOutside = true;
-
+    private boolean isAlreadySendNetMsg;
 
     private static boolean isValid(String param) {
         return (param != null) && (param.length() > 0);
@@ -84,7 +85,6 @@ public class Captcha {
     }
 
 
-
     public String getDeviceId() {
         return this.deviceId;
     }
@@ -116,12 +116,15 @@ public class Captcha {
     public void setDebug(boolean debug) {
         this.debug = debug;
     }
-    public void setTimeout(int timeout){
+
+    public void setTimeout(int timeout) {
         this.mTimeout = timeout;
     }
-    public int getTimeout(){
+
+    public int getTimeout() {
         return this.mTimeout;
     }
+
     public boolean checkParams() {
         boolean ret = false;
         ret = isValid(captchaId) && (caListener != null);
@@ -144,14 +147,16 @@ public class Captcha {
 
     /**
      * 设置弹框时背景页面是否模糊，默认为模糊，也是Android的默认风格。
+     *
      * @param dimEnabled，true：模糊（默认风格），false：不模糊
      */
-    public void setBackgroundDimEnabled(boolean dimEnabled){
+    public void setBackgroundDimEnabled(boolean dimEnabled) {
         backgroundDimEnabled = dimEnabled;
     }
 
     /**
      * 设置弹框时点击对话框之外区域是否自动消失，默认为消失
+     *
      * @param canceled：如果设置不自动消失请设置为false
      */
     public void setCanceledOnTouchOutside(boolean canceled) {
@@ -159,10 +164,10 @@ public class Captcha {
     }
 
     private boolean initDialog() {
-        try{
+        try {
             if (backgroundDimEnabled) {
                 captchaDialog = new CaptchaDialog(context);
-            }else{
+            } else {
                 captchaDialog = new CaptchaDialog(context, R.style.DialogStyle);
             }
             captchaDialog.setPosition(mPositionX, mPositionY, mPositionW, mPositionH);
@@ -184,7 +189,7 @@ public class Captcha {
                     Log.d(TAG, "用户取消验证");
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return true;
@@ -200,24 +205,23 @@ public class Captcha {
     }
 
     public void start() {
-        if (!checkParams()){
-              return;
+        if (!checkParams()) {
+            return;
         }
         Log.d(TAG, "start");
         //loading框架：
         if (!((Activity) context).isFinishing()) {
             if (progressDialog == null) {
-                progressDialog = new ProgressDialog(context);
+                progressDialog = new CaptchaProgressDialog(context);
             }
             //渲染Loading
-            progressDialog.setMessage("Loading");
+            progressDialog.setPosition(mPositionX, mPositionY, mPositionW, mPositionH);
             progressDialog.setCancelable(true);
-            progressDialog.setTitle(null);
             progressDialog.setIndeterminate(true);
             progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    if (timer!=null){
+                    if (timer != null) {
                         timer.cancel();
                         timer.purge();
                     }
@@ -225,10 +229,10 @@ public class Captcha {
                     //caListener.onCancel();
                 }
             });
-            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener(){
+            progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
-                    if(timer!=null){
+                    if (timer != null) {
                         timer.cancel();
                         timer.purge();
                     }
@@ -238,6 +242,7 @@ public class Captcha {
             if (handler == null) {
                 handler = new MyHandler((Activity) context, progressDialog);
             }
+            isAlreadySendNetMsg = false;
             setSchedule(INITTIMEOUT, progressDialog, mTimeout);
         }
     }
@@ -263,9 +268,9 @@ public class Captcha {
 
     private static class MyHandler extends Handler {
         WeakReference<Activity> mActivityReference;
-        ProgressDialog mp;
+        CaptchaProgressDialog mp;
 
-        MyHandler(Activity activity, ProgressDialog p) {
+        MyHandler(Activity activity, CaptchaProgressDialog p) {
             mActivityReference = new WeakReference<Activity>(activity);
             mp = p;
         }
@@ -277,15 +282,15 @@ public class Captcha {
                 switch (msg.what) {
                     case NONETWROK:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setMessage("网络异常，请检查网络后重试");
+                        mp.setProgressTips("网络异常，请检查网络后重试");
                         break;
                     case VALIDATETIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setMessage("验证超时，请关闭并检查网络");
+                        mp.setProgressTips("验证超时，请关闭并检查网络");
                         break;
                     case INITTIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setMessage("初始化超时，请关闭并检查网络");
+                        mp.setProgressTips("初始化超时，请关闭并检查网络");
                         break;
                     default:
                         break;
@@ -299,6 +304,7 @@ public class Captcha {
     private class MyTask extends TimerTask {
         private int type;
         private ProgressDialog p;
+
 
         public MyTask(int type, ProgressDialog p) {
             this.type = type;
@@ -323,7 +329,12 @@ public class Captcha {
                     return;
 
             }
-            handler.sendMessage(message);
+            //避免重复发送网络状态消息，比如因为无网导致的网络超时，只需提示无网络连接，而无需提示初始化超时
+            if (!isAlreadySendNetMsg) {
+                handler.sendMessage(message);
+                isAlreadySendNetMsg = true;
+            }
+
             Log.d(TAG, "MyTask end");
         }
 

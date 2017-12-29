@@ -2,8 +2,10 @@ package com.netease.nis.captcha;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
+import android.widget.Toast;
 
 /**
  * Created by hzhudingyao on 2016/12/5.
@@ -58,19 +60,25 @@ public class JSInterface {
     @JavascriptInterface
     public void onReady() {
         ((Activity) context).runOnUiThread(new Runnable() {
-            @Override
             public void run() {
-                if (!captchaDialog.isShowing())
-                    captchaDialog.show();
+                if (!captchaDialog.isShowing()) {
+
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            captchaDialog.show();
+                        }
+                    }, 100);
+                }
             }
         });
-
         if (captchaListener != null) {
             captchaListener.onReady(true);
         }
         if (captchaDialog.getProgressDialog() != null) {
             captchaDialog.getProgressDialog().dismiss();
         }
+
+
     }
 
     /**
@@ -83,7 +91,16 @@ public class JSInterface {
             captchaListener.onError(msg);
         }
         if (captchaDialog.getProgressDialog() != null) {
-            captchaDialog.getProgressDialog().dismiss();
+            ((Activity) context).runOnUiThread(new Runnable() {
+                public void run() {
+                    CaptchaProgressDialog dialog = (CaptchaProgressDialog) captchaDialog.getProgressDialog();
+                    if(!dialog.isShowing()){
+                        dialog.show();
+                        dialog.setProgressTips("验证码加载失败");
+                    }
+                }
+            });
         }
+
     }
 }

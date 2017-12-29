@@ -1,5 +1,6 @@
 package com.netease.nis.captcha;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -39,6 +40,7 @@ public class CaptchaDialog extends Dialog {
         super(context);
         this.dcontext = context;
     }
+
     public CaptchaDialog(Context context, int themeResId) {
         super(context, R.style.DialogStyle);
         this.dcontext = context;
@@ -119,8 +121,8 @@ public class CaptchaDialog extends Dialog {
 
     private void getDialogWidth() {
 
-
         try {
+
             DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
             int width = metrics.widthPixels;
             int height = metrics.heightPixels;
@@ -204,7 +206,9 @@ public class CaptchaDialog extends Dialog {
 
         final LayoutParams layoutParams = dwebview.getLayoutParams();
         layoutParams.width = dWidth;
-        layoutParams.height = LayoutParams.WRAP_CONTENT;
+        int height = (int) ((float) dWidth / 2.0 + 52 * dScale + 15);
+        layoutParams.height = height;
+        //layoutParams.height = LayoutParams.WRAP_CONTENT;
         dwebview.setLayoutParams(layoutParams);
     }
 
@@ -214,8 +218,14 @@ public class CaptchaDialog extends Dialog {
 //        if (progressDialog != null) {
 //            progressDialog.dismiss();
 //        }
-        if(dcontext!=null)
-             super.show();
+        try {
+            if (dcontext != null && !((Activity) dcontext).isFinishing()) {
+                super.show();
+            }
+        } catch (Exception e) {
+            Log.e(Captcha.TAG, "Captcha Dialog show Error:" + e.toString());
+        }
+
     }
 
     @Override

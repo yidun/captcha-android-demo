@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         * v2.0
         * 拖动 a05f036b70ab447b87cc788af9a60974
         * */
-        String testCaptchaId = "a05f036b70ab447b87cc788af9a60974"; // TODO: 这里填入从易盾官网申请到的验证码id，上面是几种测试风格的id。 0489d7c00eff49089c56dfcd4b67f250
+        String testCaptchaId = "d4f32e92c74e4363928fb791ecaa3a44"; // TODO: 这里填入从易盾官网申请到的验证码id，上面是几种测试风格的id。 0489d7c00eff49089c56dfcd4b67f250
 
         mContext = this;
         initLoginView();
@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         mCaptcha.setDebug(false);
         //可选：设置超时时间
         mCaptcha.setTimeout(10000);
+
 
         //设置验证码弹框的坐标位置: 只能设置left，top和宽度，高度为自动计算。默认无须设置为窗口居中。
         //mCaptcha.setPosition(1, 200, 1040, -1);
@@ -165,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
             if (success) {
                 //必填：开始验证
                 mCaptcha.Validate();
+
             } else {
                 toastMsg("验证码SDK参数设置错误,请检查配置");
             }
