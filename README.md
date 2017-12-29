@@ -17,13 +17,13 @@ allprojects {
 ```
 然后在模块的build.gradle中的dependencies添加：
 ```
-compile 'com.github.yidun:captcha-android-demo:2.4.1'
+compile 'com.github.yidun:captcha-android-demo:2.4.2'
 ```
 示例：
 
 ```
 dependencies {
-    compile 'com.github.yidun:captcha-android-demo:2.4.1'
+    compile 'com.github.yidun:captcha-android-demo:2.4.2'
 }
 ```
 
