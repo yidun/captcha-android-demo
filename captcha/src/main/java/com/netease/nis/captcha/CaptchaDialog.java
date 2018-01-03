@@ -231,7 +231,11 @@ public class CaptchaDialog extends Dialog {
     @Override
     public void dismiss() {
         isShowing = false;
-        super.dismiss();
+        try {
+            super.dismiss();
+        } catch (Exception e) {
+            Log.e(Captcha.TAG, "Captcha Dialog dismiss Error:" + e.toString());
+        }
     }
 
     @Override

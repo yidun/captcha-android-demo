@@ -39,6 +39,7 @@ public class Captcha {
     private int mTimeout = 10000;
     private CaptchaProgressDialog progressDialog = null;
     private Timer timer = null;
+    private boolean isProgressDialogCanceledOnTouchOutside = true;
 
     public Captcha(Context context) {
         this.context = context;
@@ -163,6 +164,15 @@ public class Captcha {
         isCanceledOnTouchOutside = canceled;
     }
 
+    /**
+     * 设置进度框点击对话框之外区域是否自动消失，默认为消失
+     *
+     * @param canceled：如果设置不自动消失请设置为false
+     */
+    public void setProgressDialogCanceledOnTouchOutside(boolean canceled) {
+        isProgressDialogCanceledOnTouchOutside = canceled;
+    }
+
     private boolean initDialog() {
         try {
             if (backgroundDimEnabled) {
@@ -218,6 +228,7 @@ public class Captcha {
             progressDialog.setPosition(mPositionX, mPositionY, mPositionW, mPositionH);
             progressDialog.setCancelable(true);
             progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(isProgressDialogCanceledOnTouchOutside);
             progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
