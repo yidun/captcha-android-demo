@@ -161,11 +161,11 @@ protected void onCreate(Bundle savedInstanceState) {
     button_login.setOnClickListener(new OnClickListener() {
         @Override
         public void onClick(View view) {
+            //必填：初始化 captcha框架
+            mCaptcha.start();
             mLoginTask = new UserLoginTask();
             //关闭mLoginTask任务可以放在myCaptchaListener的onCancel接口中处理
             mLoginTask.execute();
-            //必填：初始化 captcha框架
-            mCaptcha.start();
             //可直接调用验证函数Validate()，本demo采取在异步任务中调用（见UserLoginTask类中）
             //mCaptcha.Validate();
         }

@@ -23,7 +23,7 @@ public class Captcha {
     public final static String TAG = "myCaptcha";
     public final static String SDKVER = "2.4.2";
 
-    public static final String baseURL = "http://cstaticdun.126.net/api/v2/mobile_2_4_2.html";
+    public static final String baseURL = "https://cstaticdun.126.net/api/v2/mobile_2_4_2.html";
     //https://c.dun.163yun.com/api/v1/mobile.html
     //private static final String baseURL = "http://nctest-captcha.nis.netease.com/v2.x/test/mobile.html";
     public final static int NONETWROK = 0;
