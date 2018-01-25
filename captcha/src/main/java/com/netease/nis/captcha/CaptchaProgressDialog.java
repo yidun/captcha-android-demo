@@ -1,6 +1,7 @@
 package com.netease.nis.captcha;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -28,10 +29,11 @@ public class CaptchaProgressDialog extends ProgressDialog {
     private TextView mStatusTip;
     private ProgressBar mProgressBar;
     private ImageView mErrorIcon;
-
+    private Context mContext;
 
     public CaptchaProgressDialog(Context context) {
         super(context);
+        mContext = context;
     }
 
     @Override
@@ -131,5 +133,27 @@ public class CaptchaProgressDialog extends ProgressDialog {
         mProgressBar.setVisibility(View.INVISIBLE);
         mErrorIcon.setVisibility(View.VISIBLE);
         mStatusTip.setText(mProgressTips);
+    }
+
+    //重载show函数，做预处理，安卓Dialog原生show经常导致各种问题
+    @Override
+    public void show() {
+        try {
+            if (mContext != null && !((Activity) mContext).isFinishing()) {
+                super.show();
+            }
+        } catch (Exception e) {
+            Log.e(Captcha.TAG, "Captcha Progress Dialog show Error:" + e.toString());
+        }
+
+    }
+
+    @Override
+    public void dismiss() {
+        try {
+            super.dismiss();
+        } catch (Exception e) {
+            Log.e(Captcha.TAG, "Captcha Progress Dialog dismiss Error:" + e.toString());
+        }
     }
 }
