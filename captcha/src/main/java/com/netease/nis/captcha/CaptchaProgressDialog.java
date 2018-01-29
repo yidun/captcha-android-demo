@@ -9,10 +9,12 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by hzhuqi on 2017/12/8.
@@ -29,7 +31,10 @@ public class CaptchaProgressDialog extends ProgressDialog {
     private TextView mStatusTip;
     private ProgressBar mProgressBar;
     private ImageView mErrorIcon;
+    public boolean isCanClickDisappear = false;
     private Context mContext;
+    private View bgView;
+    public boolean isCancelLoading = false;
 
     public CaptchaProgressDialog(Context context) {
         super(context);
@@ -39,6 +44,7 @@ public class CaptchaProgressDialog extends ProgressDialog {
     @Override
     public void onStart() {
         super.onStart();
+        isCanClickDisappear = false;
         mProgressBar.setVisibility(View.VISIBLE);
         mErrorIcon.setVisibility(View.INVISIBLE);
         mStatusTip.setText("正在加载，请稍后...");
@@ -57,6 +63,20 @@ public class CaptchaProgressDialog extends ProgressDialog {
         mStatusTip = (TextView) findViewById(R.id.status_tip);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
         mErrorIcon = (ImageView) findViewById(R.id.error_pic);
+        bgView = findViewById(R.id.bg);
+        bgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isCanClickDisappear) {
+                    try {
+                        dismiss();
+                    } catch (Exception e) {
+                        Log.e(Captcha.TAG, "Captcha Progress Dialog dismiss Error:" + e.toString());
+                    }
+
+                }
+            }
+        });
     }
 
     public void setPosition(int left, int top, int w, int h) {

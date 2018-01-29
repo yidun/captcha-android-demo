@@ -90,13 +90,14 @@ public class JSInterface {
         if (captchaListener != null) {
             captchaListener.onError(msg);
         }
-        if (captchaDialog.getProgressDialog() != null) {
+        final CaptchaProgressDialog dialog = (CaptchaProgressDialog) captchaDialog.getProgressDialog();
+        if (dialog != null && (dialog.isCancelLoading)) {
             ((Activity) context).runOnUiThread(new Runnable() {
                 public void run() {
-                    CaptchaProgressDialog dialog = (CaptchaProgressDialog) captchaDialog.getProgressDialog();
-                    if(!dialog.isShowing()){
+                    if (!dialog.isShowing()) {
                         dialog.show();
                         dialog.setProgressTips("验证码加载失败");
+                        dialog.isCanClickDisappear = true;
                     }
                 }
             });

@@ -79,10 +79,15 @@ public class CaptchaWebView extends WebView {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             // TODO Auto-generated method stub
+            //客户反馈这个地方可能会出现异常，捕获下
+            try{
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                context.startActivity(intent);
+            }catch (Exception e){
+                Log.e(Captcha.TAG, "shouldOverrideUrlLoading intent error:" + e.toString());
+            }
 
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(url));
-            context.startActivity(intent);
 
             return true;
         }

@@ -41,6 +41,7 @@ public class Captcha {
     private Timer timer = null;
     private boolean isProgressDialogCanceledOnTouchOutside = true;
 
+
     public Captcha(Context context) {
         this.context = context;
     }
@@ -235,6 +236,7 @@ public class Captcha {
                     if (timer != null) {
                         timer.cancel();
                         timer.purge();
+                        progressDialog.isCancelLoading=true;
                     }
                     //这里注释掉，后面captchaDialog.setOnCancelListener会有调用caListener.onCancel();
                     //caListener.onCancel();
@@ -294,14 +296,17 @@ public class Captcha {
                     case NONETWROK:
                         mp.setCanceledOnTouchOutside(true);
                         mp.setProgressTips("网络异常，请检查网络后重试");
+                        mp.isCanClickDisappear=true;
                         break;
                     case VALIDATETIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
                         mp.setProgressTips("验证超时，请关闭并检查网络");
+                        mp.isCanClickDisappear=true;
                         break;
                     case INITTIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
                         mp.setProgressTips("初始化超时，请关闭并检查网络");
+                        mp.isCanClickDisappear=true;
                         break;
                     default:
                         break;
