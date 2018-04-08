@@ -14,7 +14,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:layout_marginTop="24dp"
-        android:text="正在加载，请稍后..." />
+        android:text="正在加载，请稍后..."
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
     <ImageView
         android:id="@+id/error_pic"

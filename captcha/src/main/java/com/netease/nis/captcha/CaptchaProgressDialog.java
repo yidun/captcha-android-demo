@@ -47,7 +47,7 @@ public class CaptchaProgressDialog extends ProgressDialog {
         isCanClickDisappear = false;
         mProgressBar.setVisibility(View.VISIBLE);
         mErrorIcon.setVisibility(View.INVISIBLE);
-        mStatusTip.setText("正在加载，请稍后...");
+        mStatusTip.setText(R.string.tip_loading);
     }
 
     @Override
@@ -155,6 +155,12 @@ public class CaptchaProgressDialog extends ProgressDialog {
         mStatusTip.setText(mProgressTips);
     }
 
+    public void setProgressTips(int mProgressTips) {
+        mProgressBar.setVisibility(View.INVISIBLE);
+        mErrorIcon.setVisibility(View.VISIBLE);
+        mStatusTip.setText(mProgressTips);
+    }
+
     //重载show函数，做预处理，安卓Dialog原生show经常导致各种问题
     @Override
     public void show() {
@@ -165,7 +171,6 @@ public class CaptchaProgressDialog extends ProgressDialog {
         } catch (Exception e) {
             Log.e(Captcha.TAG, "Captcha Progress Dialog show Error:" + e.toString());
         }
-
     }
 
     @Override

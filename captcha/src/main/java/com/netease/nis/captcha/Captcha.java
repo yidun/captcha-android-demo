@@ -4,15 +4,21 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static java.security.AccessController.getContext;
 
 /**
  * 本地Captcha1 其中包括请求url与二次校验函数，需要与服务器协商再写
@@ -40,7 +46,7 @@ public class Captcha {
     private CaptchaProgressDialog progressDialog = null;
     private Timer timer = null;
     private boolean isProgressDialogCanceledOnTouchOutside = true;
-
+    private boolean isEnglishLanguage = false;
 
     public Captcha(Context context) {
         this.context = context;
@@ -147,6 +153,16 @@ public class Captcha {
         mPositionH = h;
     }
 
+    public void setEnglishLanguage() {
+        isEnglishLanguage = true;
+        Resources resources = context.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+        // 应用用户选择语言
+        config.locale = Locale.ENGLISH;
+        resources.updateConfiguration(config, dm);
+    }
+
     /**
      * 设置弹框时背景页面是否模糊，默认为模糊，也是Android的默认风格。
      *
@@ -177,7 +193,7 @@ public class Captcha {
     private boolean initDialog() {
         try {
             if (backgroundDimEnabled) {
-                captchaDialog = new CaptchaDialog(context);
+                captchaDialog = new CaptchaDialog(context, isEnglishLanguage);
             } else {
                 captchaDialog = new CaptchaDialog(context, R.style.DialogStyle);
             }
@@ -236,7 +252,7 @@ public class Captcha {
                     if (timer != null) {
                         timer.cancel();
                         timer.purge();
-                        progressDialog.isCancelLoading=true;
+                        progressDialog.isCancelLoading = true;
                     }
                     //这里注释掉，后面captchaDialog.setOnCancelListener会有调用caListener.onCancel();
                     //caListener.onCancel();
@@ -295,18 +311,18 @@ public class Captcha {
                 switch (msg.what) {
                     case NONETWROK:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setProgressTips("网络异常，请检查网络后重试");
-                        mp.isCanClickDisappear=true;
+                        mp.setProgressTips(R.string.tip_no_network);
+                        mp.isCanClickDisappear = true;
                         break;
                     case VALIDATETIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setProgressTips("验证超时，请关闭并检查网络");
-                        mp.isCanClickDisappear=true;
+                        mp.setProgressTips(R.string.tip_validate_timeout);
+                        mp.isCanClickDisappear = true;
                         break;
                     case INITTIMEOUT:
                         mp.setCanceledOnTouchOutside(true);
-                        mp.setProgressTips("初始化超时，请关闭并检查网络");
-                        mp.isCanClickDisappear=true;
+                        mp.setProgressTips(R.string.tip_init_timeout);
+                        mp.isCanClickDisappear = true;
                         break;
                     default:
                         break;

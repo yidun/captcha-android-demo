@@ -96,7 +96,7 @@ public class JSInterface {
                 public void run() {
                     if (!dialog.isShowing()) {
                         dialog.show();
-                        dialog.setProgressTips("验证码加载失败");
+                        dialog.setProgressTips(R.string.tip_load_failed);
                         dialog.isCanClickDisappear = true;
                     }
                 }

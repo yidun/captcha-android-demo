@@ -35,10 +35,12 @@ public class CaptchaDialog extends Dialog {
     private int mPositionW = -1;
     private int mPositionH = -1;
     private ProgressDialog progressDialog = null;
+    private boolean isEnglishLangulage;
 
-    public CaptchaDialog(Context context) {
+    public CaptchaDialog(Context context, boolean isEnglishLangulage) {
         super(context);
         this.dcontext = context;
+        this.isEnglishLangulage = isEnglishLangulage;
     }
 
     public CaptchaDialog(Context context, int themeResId) {
@@ -163,6 +165,8 @@ public class CaptchaDialog extends Dialog {
         sburl.append("&title=" + this.dTitle);
         sburl.append("&debug=" + this.debug);
         sburl.append("&width=" + (int) (dWidth / dScale));
+        if (isEnglishLangulage)
+            sburl.append("&lang=en");
         String requrl = sburl.toString();
         Log.d(Captcha.TAG, "url: " + requrl);
         dwebview.addJavascriptInterface(new JSInterface(dcontext, dcaListener, this), "JSInterface");
