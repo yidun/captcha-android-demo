@@ -153,6 +153,8 @@ protected void onCreate(Bundle savedInstanceState) {
     }
     mCaptcha.setCaptchaId(testCaptchaId);
     mCaptcha.setCaListener(myCaptchaListener);
+    //可选:设置验证码语言为英文，如果不调用该接口默认为中文
+    //mCaptcha.setEnglishLanguage();
     //可选：开启debug
     mCaptcha.setDebug(false);
     //可选：设置超时时间
