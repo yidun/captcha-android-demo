@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Captcha</string>
-    <string name="tip_loading">loading...</string>
-    <string name="tip_no_network">No network,please retry</string>
-    <string name="tip_validate_timeout">Validate timeout,please retry</string>
-    <string name="tip_init_timeout">Network Timeout，please retry </string>
-    <string name="tip_load_failed">Loading failed. Please retry</string>
-</resources>
