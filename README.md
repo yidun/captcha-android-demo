@@ -156,11 +156,17 @@ protected void onCreate(Bundle savedInstanceState) {
     mCaptcha.setCaptchaId(testCaptchaId);
     mCaptcha.setCaListener(myCaptchaListener);
     //可选:设置验证码语言为英文，如果不调用该接口默认为中文
-    //mCaptcha.setEnglishLanguage();
+    mCaptcha.setLanguageType(Captcha.LangType.LANG_EN);
     //可选：开启debug
     mCaptcha.setDebug(false);
     //可选：设置超时时间
     mCaptcha.setTimeout(10000);
+    //可选：设置验证码弹框的坐标位置: 只需设置left，top和宽度，高度为自动计算。默认无须设置为窗口居中。
+    mCaptcha.setPosition(-1, -1, captchaWidth, -1);
+    //可选：设置弹框时背景页面是否模糊，默认无须设置，默认显示弹框时背景页面模糊，Android默认风格。
+    mCaptcha.setBackgroundDimEnabled(false);
+    //可选：设置弹框时点击对话框之外区域是否自动消失，默认为消失。如果设置不自动消失请设置为false。
+    mCaptcha.setCanceledOnTouchOutside(false);
     //登陆操作
     button_login.setOnClickListener(new OnClickListener() {
         @Override
