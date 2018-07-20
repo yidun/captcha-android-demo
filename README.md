@@ -1,38 +1,24 @@
 ﻿# 易盾验证码Android SDK接入指南
 
 ## 一、SDK集成
-### 1、JitPack方式集成（推荐）
-在AndroidStudio工程的build.grade里添加：
+### 1、获取SDK
+从github上下载验证码sdk的aar包
+[点我下载sdk](https://github.com/yidun/captcha-android-demo/tree/master/sdk)
+
+
+### 2、手动导入SDK
+将获取的sdk的aar文件放到工程中的libs文件夹下，然后在app的build.gradle文件中增加如下代码
 ```
-maven { url "https://jitpack.io" }
-```
-示例：
-```
-allprojects {
-    repositories {
-        jcenter()
-        maven { url "https://jitpack.io" }
+repositories {
+    flatDir {
+        dirs 'libs'
     }
 }
 ```
-然后在模块的build.gradle中的dependencies添加：
+在dependencies依赖中增加对aar包的引用
 ```
-compile 'com.github.yidun:captcha-android-demo:2.4.2'
+compile(name:'captcha-release', ext: 'aar')//aar名称和版本号以下载下来的最新版为准
 ```
-示例：
-
-```
-dependencies {
-    compile 'com.github.yidun:captcha-android-demo:2.4.2'
-}
-```
-
-最新SDK版本通过JitPack官网查询：[点击链接查看](https://jitpack.io/#yidun/captcha-android-demo)
-
-
-
-### 2、源码方式集成
-GitHub上下载源码集成并修改：[GitHub源码地址](https://github.com/yidun/captcha-android-demo)
 
 ## 二、SDK接口
 ```
@@ -51,8 +37,24 @@ public boolean checkParams();
 //设置弹框时点击对话框之外区域是否自动消失，默认为消失。如果设置不自动消失设为false。
 public void setCanceledOnTouchOutside(boolean);
 
+//设置验证码弹框的坐标位置: 只能设置left，top和宽度w，高度为自动计算。默认无须设置为窗口居中
+public void setPosition(int left, int top, int w, int h)
+
 //设置弹框时背景页面是否模糊，默认为模糊，也是Android的默认风格。true：模糊（默认风格），false：不模糊
 public void setBackgroundDimEnabled(boolean);
+
+//设置验证码显示的语言,不设置默认为中文简体，支持中文繁体，英文，日文，韩文，泰语，越南语
+ public void setLanguageType(LangType langType)
+ 其中的LangType是一个枚举类型，其值与含义如下：
+ public enum LangType {
+        LANG_ZH_CN,//中文简体
+        LANG_ZH_TW,//中文繁体
+        LANG_EN,//英文
+        LANG_JA,//日文
+        LANG_KO,//韩文
+        LANG_TH,//泰语
+        LANG_VI//越南语
+    }
 ```
 
 ## 三、集成说明
