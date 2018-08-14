@@ -55,6 +55,16 @@ public void setBackgroundDimEnabled(boolean);
         LANG_TH,//泰语
         LANG_VI//越南语
     }
+//设置验证码滑动条滑块不同状态的图片,如果不设置则使用易盾默认图片
+/**
+ * 设置验证码滑动条的图片样式，参数均为http url
+ *
+ * @param slideIconUrl 滑块初始状态的图片url
+ * @param slideIconSuccessUrl 验证成功时滑块状态的图片url
+ * @param slideIconMoveUrl  滑块滑动过程中图片url
+ * @param slideIconErrorUrl  验证错误时滑块状态的图片的url
+ */
+public void setControlBarImageUrl(String slideIconUrl, String slideIconSuccessUrl, String slideIconMoveUrl, String slideIconErrorUrl)
 ```
 
 ## 三、集成说明
@@ -155,8 +165,8 @@ protected void onCreate(Bundle savedInstanceState) {
     }
     mCaptcha.setCaptchaId(testCaptchaId);
     mCaptcha.setCaListener(myCaptchaListener);
-    //可选:设置验证码语言为英文，如果不调用该接口默认为中文
-    mCaptcha.setLanguageType(Captcha.LangType.LANG_EN);
+    //可选:设置验证码语言为英文，如果不调用该接口默认为中文,也可以通过参数传递其他类型支持的语言
+    //mCaptcha.setLanguageType(Captcha.LangType.LANG_EN);
     //可选：开启debug
     mCaptcha.setDebug(false);
     //可选：设置超时时间
@@ -167,6 +177,8 @@ protected void onCreate(Bundle savedInstanceState) {
     mCaptcha.setBackgroundDimEnabled(false);
     //可选：设置弹框时点击对话框之外区域是否自动消失，默认为消失。如果设置不自动消失请设置为false。
     mCaptcha.setCanceledOnTouchOutside(false);
+    //可选：设置验证码滑动条滑块不同状态的图片
+    mCaptcha.setControlBarImageUrl("https://www.baidu.com/img/bd_logo1.png",null,null,null);//设置滑块的初始状态图片为百度首页logo,其余3个状态使用默认
     //登陆操作
     button_login.setOnClickListener(new OnClickListener() {
         @Override
