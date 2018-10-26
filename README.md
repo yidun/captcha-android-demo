@@ -43,7 +43,7 @@ public void setPosition(int left, int top, int w, int h)
 //设置弹框时背景页面是否模糊，默认为模糊，也是Android的默认风格。true：模糊（默认风格），false：不模糊
 public void setBackgroundDimEnabled(boolean);
 
-//设置验证码显示的语言,不设置默认为中文简体，支持中文繁体，英文，日文，韩文，泰语，越南语
+//设置验证码显示的语言,不设置默认为中文简体，支持中文繁体，英文，日文，韩文，泰语，越南语，法语，俄罗斯语，阿拉伯语
  public void setLanguageType(LangType langType)
  其中的LangType是一个枚举类型，其值与含义如下：
  public enum LangType {
@@ -65,6 +65,9 @@ public void setBackgroundDimEnabled(boolean);
  * @param slideIconErrorUrl  验证错误时滑块状态的图片的url
  */
 public void setControlBarImageUrl(String slideIconUrl, String slideIconSuccessUrl, String slideIconMoveUrl, String slideIconErrorUrl)
+
+//设置验证码遮罩层模糊度，值为0表示无模糊（即透明），值为0.5f表示半透明，值为1表示全模糊（即黑色背景）。默认无需设置值为0.5f
+public void setBackgroundDimAmount(float amount)
 ```
 
 ## 三、集成说明
@@ -179,6 +182,8 @@ protected void onCreate(Bundle savedInstanceState) {
     mCaptcha.setCanceledOnTouchOutside(false);
     //可选：设置验证码滑动条滑块不同状态的图片
     mCaptcha.setControlBarImageUrl("https://www.baidu.com/img/bd_logo1.png",null,null,null);//设置滑块的初始状态图片为百度首页logo,其余3个状态使用默认
+    //设置验证码遮罩层模糊度，值为0表示无模糊（即透明），值为0.5f表示半透明，值为1表示全模糊（即黑色背景），默认值为0.5f
+    mCaptcha.setBackgroundDimAmount(0.5f);
     //登陆操作
     button_login.setOnClickListener(new OnClickListener() {
         @Override
