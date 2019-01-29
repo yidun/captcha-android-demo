@@ -100,6 +100,7 @@ final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
 // 初始化验证码
 final Captcha captcha = Captcha.getInstance().init(configuration);
 ```
+**NOTE:【重要】如果您在易盾官网申请的业务id为智能无感知类型，请务必设置mode参数，否则请不要设置**
 
 ### 2、弹出验证码
 ```
