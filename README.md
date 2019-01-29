@@ -26,7 +26,7 @@ compile(name:'captcha-release', ext: 'aar')//aar名称和版本号以下载下�
 final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .captchaId(noSenseCaptchaId)// 验证码业务id
                         .url(captchaUrl) // 接入者无需设置，该接口为调试接口
-                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE) // 验证码类型，默认为传统验证码，如果要使用无感知请设置该类型，否则无需设置
+                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE) // 验证码类型，默认为普通验证码，如果要使用无感知请设置该类型，否则无需设置
                         .listener(captchaListener) // 验证码回调监听器
                         .timeout(1000 * 10) // 超时时间，一般无需设置
                         .languageType(langType) // 验证码语言类型，一般无需设置，可设置值请参看下面验证码语言枚举类介绍
@@ -94,7 +94,7 @@ captcha.validate();
 // 创建构建验证码的配置类，可配置详细选项请参看上面SDK接口 验证码属性配置类：CaptchaConfiguration
 final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .captchaId(noSenseCaptchaId)// 验证码业务id
-                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE)  // 验证码类型，默认为传统验证码，如果要使用无感知请设置该类型，否则无需设置
+                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE)  // 验证码类型，默认为普通验证码，如果要使用无感知请设置该类型，否则无需设置
                         .listener(captchaListener) //设置验证码回调监听器
                         .build(context); // Context，请使用Activity实例的Context
 // 初始化验证码
