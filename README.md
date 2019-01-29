@@ -21,227 +21,91 @@ compile(name:'captcha-release', ext: 'aar')//aar名称和版本号以下载下�
 ```
 
 ## 二、SDK接口
+### 1）验证码属性配置类：CaptchaConfiguration
 ```
-//可以自定义deviceid，若不填写则默认获取手机的imei值
-public void setDeviceId(String);  
+final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
+                        .captchaId(noSenseCaptchaId)// 验证码业务id
+                        .url(captchaUrl) // 接入者无需设置，该接口为调试接口
+                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE) // 验证码类型，默认为传统验证码，如果要使用无感知请设置以下类型
+                        .listener(captchaListener) // 验证码回调监听器
+                        .timeout(1000 * 10) // 超时时间，一般无需设置
+                        .languageType(langType) // 验证码语言类型，一般无需设置，可设置值请参看下面验证码语言枚举类介绍
+                        .debug(true) // 是否启用debug模式，一般无需设置
+                        .position(-1, -1, 0, 0) // 设置验证码框的位置和宽度，一般无需设置，不推荐设置宽高，后面将逐步废弃该接口
+                        .controlBarImageUrl(controlBarStartUrl, controlBarMovingUrl, controlBarErrorUrl) // 自定义验证码滑动条滑块的不同状态图片
+                        .backgroundDimAmount(dimAmount) // 验证码框遮罩层透明度，一般无需设置
+                        .build(context);
+```
+### 2）验证码语言枚举类
+在上述构建验证码属性配置类CaptchaConfiguration的languageType属性时，其值为CaptchaConfiguration.LangType类型，可使用如下值
+```
+ public static enum LangType {
+        LANG_ZH_CN, // 中文简体
+        LANG_ZH_TW, // 中文繁体
+        LANG_EN,    // 英文
+        LANG_JA,    // 日文
+        LANG_KO,    // 韩文
+        LANG_TH,    // 泰语
+        LANG_VI,    // 越南语
+        LANG_FR,    // 法语
+        LANG_AR,    // 阿拉伯语
+        LANG_RU;    // 俄语 
 
-//可以自定义sdk框架超时时间，单位毫秒，默认是10000即10秒
-public void setTimeout(int);
-
-//是否开启调试，设置为true后可以看到部分调试信息
-public void setDebug(boolean);
-
-//简单测试是否填写captcha 是否初始化，包括captchaId与设置监听对象
-public boolean checkParams();
-
-//设置弹框时点击对话框之外区域是否自动消失，默认为消失。如果设置不自动消失设为false。
-public void setCanceledOnTouchOutside(boolean);
-
-//设置验证码弹框的坐标位置: 只能设置left，top和宽度w，高度为自动计算。默认无须设置为窗口居中
-public void setPosition(int left, int top, int w, int h)
-
-//设置弹框时背景页面是否模糊，默认为模糊，也是Android的默认风格。true：模糊（默认风格），false：不模糊
-public void setBackgroundDimEnabled(boolean);
-
-//设置验证码显示的语言,不设置默认为中文简体，支持中文繁体，英文，日文，韩文，泰语，越南语，法语，俄罗斯语，阿拉伯语
- public void setLanguageType(LangType langType)
- 其中的LangType是一个枚举类型，其值与含义如下：
- public enum LangType {
-        LANG_ZH_CN,//中文简体
-        LANG_ZH_TW,//中文繁体
-        LANG_EN,//英文
-        LANG_JA,//日文
-        LANG_KO,//韩文
-        LANG_TH,//泰语
-        LANG_VI//越南语
+        private LangType() {
+        }
     }
-//设置验证码滑动条滑块不同状态的图片,如果不设置则使用易盾默认图片
-/**
- * 设置验证码滑动条的图片样式，参数均为http url
- *
- * @param slideIconUrl 滑块初始状态的图片url
- * @param slideIconSuccessUrl 验证成功时滑块状态的图片url
- * @param slideIconMoveUrl  滑块滑动过程中图片url
- * @param slideIconErrorUrl  验证错误时滑块状态的图片的url
- */
-public void setControlBarImageUrl(String slideIconUrl, String slideIconSuccessUrl, String slideIconMoveUrl, String slideIconErrorUrl)
-
-//设置验证码遮罩层模糊度，值为0表示无模糊（即透明），值为0.5f表示半透明，值为1表示全模糊（即黑色背景）。默认无需设置值为0.5f
-public void setBackgroundDimAmount(float amount)
+```
+### 3）验证码功能提供类：Captcha
+```
+Captcha captcha = Captcha.getInstance().init(configuration);
+captcha.validate();
 ```
 
 ## 三、集成说明
 ### 1、初始化
 ```
-Captcha mCaptcha = new Captcha(context);
+ // 创建验证码回调监听器
+ captchaListener = new CaptchaListener() {
+            @Override
+            public void onReady() {
 
-//设置CaptchaId：这里填入从易盾官网申请到的验证码id
-/*
-* v2.0测试用id：
-* 拖动 a05f036b70ab447b87cc788af9a60974
-* */
-mCaptcha.setCaptchaId(captchaid);
-
-//设置监听对象captchaListener
-mCaptcha.setCaListener(captchalistener);
-
-
-//其中captchalistener接口形式：
-public interface CaptchaListener {
-    //通知验证已准备完毕,true准备完成/false未准备完成
-    void onReady(Boolean status); 
-
-    //通知native关闭验证
-    void closeWindow();
-
-    //通知javascript发生严重错误，msg为错误信息
-    void onError(String msg);
-
-    //通知验证结果，其中validate值为返回值。可以在该函数中进行用户自定义二次校验
-    void onValidate(String result, String validate, String message);
-
-    //用户取消验证
-    void onCancel();
-}
-```
-
-示例：
-```
-/*验证码SDK,该Demo采用异步获取方式*/
-private UserLoginTask mLoginTask = null;
-//自定义Listener格式如下
-CaptchaListener myCaptchaListener = new CaptchaListener() {
-
-    @Override
-    public void onValidate(String result, String validate, String message) {
-        //验证结果，valiadte，可以根据返回的三个值进行用户自定义二次验证
-        if (validate.length() > 0) {
-            toastMsg("验证成功，validate = " + validate);
-        } else {
-            toastMsg("验证失败：result = " + result + ", validate = " + validate + ", message = " + message);
-
-        }
-    }
-
-    @Override
-    public void closeWindow() {
-        //请求关闭页面
-        toastMsg("关闭页面");
-    }
-
-    @Override
-    public void onError(String errormsg) {
-        //出错
-        toastMsg("错误信息：" + errormsg);
-    }
-
-    @Override
-    public void onCancel() {
-        toastMsg("取消线程");
-        //用户取消加载或者用户取消验证，关闭异步任务，也可根据情况在其他地方添加关闭异步任务接口
-        if (mLoginTask != null) {
-            if (mLoginTask.getStatus() == AsyncTask.Status.RUNNING) {
-                Log.i(TAG, "stop mLoginTask");
-                mLoginTask.cancel(true);
             }
-        }
-    }
 
-    @Override
-    public void onReady(boolean ret) {
-        //该为调试接口，ret为true表示加载Sdk完成
-        if (ret) {
-            toastMsg("验证码sdk加载成功");
-        }
-    }
+            @Override
+            public void onValidate(String result, String validate, String msg) {
+                if (!TextUtils.isEmpty(validate)) {
+                    Toast.makeText(getApplicationContext(), "验证成功", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "验证失败", Toast.LENGTH_LONG).show();
+                }
+            }
 
-};
+            @Override
+            public void onError(String msg) {
+                Toast.makeText(getApplicationContext(), "验证出错" + msg, Toast.LENGTH_LONG).show();
+            }
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-	....
-	....
+            @Override
+            public void onCancel() {
 
-    //初始化验证码SDK相关参数，设置CaptchaId、Listener最后调用start初始化。
-    if (mCaptcha == null) {
-        mCaptcha = new Captcha(mContext);
-    }
-    mCaptcha.setCaptchaId(testCaptchaId);
-    mCaptcha.setCaListener(myCaptchaListener);
-    //可选:设置验证码语言为英文，如果不调用该接口默认为中文,也可以通过参数传递其他类型支持的语言
-    //mCaptcha.setLanguageType(Captcha.LangType.LANG_EN);
-    //可选：开启debug
-    mCaptcha.setDebug(false);
-    //可选：设置超时时间
-    mCaptcha.setTimeout(10000);
-    //可选：设置验证码弹框的坐标位置: 只需设置left，top和宽度，高度为自动计算。默认无须设置为窗口居中。
-    mCaptcha.setPosition(-1, -1, captchaWidth, -1);
-    //可选：设置弹框时背景页面是否模糊，默认无须设置，默认显示弹框时背景页面模糊，Android默认风格。
-    mCaptcha.setBackgroundDimEnabled(false);
-    //可选：设置弹框时点击对话框之外区域是否自动消失，默认为消失。如果设置不自动消失请设置为false。
-    mCaptcha.setCanceledOnTouchOutside(false);
-    //可选：设置验证码滑动条滑块不同状态的图片
-    mCaptcha.setControlBarImageUrl("https://www.baidu.com/img/bd_logo1.png",null,null,null);//设置滑块的初始状态图片为百度首页logo,其余3个状态使用默认
-    //设置验证码遮罩层模糊度，值为0表示无模糊（即透明），值为0.5f表示半透明，值为1表示全模糊（即黑色背景），默认值为0.5f
-    mCaptcha.setBackgroundDimAmount(0.5f);
-    //登陆操作
-    button_login.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //必填：初始化 captcha框架
-            mCaptcha.start();
-            mLoginTask = new UserLoginTask();
-            //关闭mLoginTask任务可以放在myCaptchaListener的onCancel接口中处理
-            mLoginTask.execute();
-            //可直接调用验证函数Validate()，本demo采取在异步任务中调用（见UserLoginTask类中）
-            //mCaptcha.Validate();
-        }
-    });
-
-}
-
-public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-    UserLoginTask() {
-    }
-
-    @Override
-    protected Boolean doInBackground(Void... params) {
-        //可选：简单验证DeviceId、CaptchaId、Listener值
-        return mCaptcha.checkParams();
-    }
-
-    @Override
-    protected void onPostExecute(final Boolean success) {
-        if (success) {
-            //必填：开始验证
-            mCaptcha.Validate();
-        } else {
-            toastMsg("验证码SDK参数设置错误,请检查配置");
-        }
-    }
-
-    @Override
-    protected void onCancelled() {
-        mLoginTask = null;
-    }
-}
+            }
+        };
+	
+// 创建构建验证码的配置类，可配置详细选项请参看上面SDK接口 验证码属性配置类：CaptchaConfiguration
+final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
+                        .captchaId(noSenseCaptchaId)// 验证码业务id
+                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE)  // 验证码类型，默认为传统验证码，如果要使用无感知请设置该类型，否则无需设置
+                        .listener(captchaListener) //设置验证码回调监听器
+                        .build(context);
+// 初始化验证码
+final Captcha captcha = Captcha.getInstance().init(configuration);
 ```
+
 ### 2、弹出验证码
 ```
-//启动验证码sdk框架，主要为loading界面
-public void start();
-
-//开始验证，主要为验证码界面
-public void Validate();
+captcha.validate();
 ```
 
-示例
-```
-mCaptcha.start();
-//可直接调用验证函数Validate()，本demo采取在异步任务中调用（见UserLoginTask类中）
-//mCaptcha.Validate();
-```
 
 ## 四、混淆配置
 proguard混淆配置文件增加：
@@ -258,16 +122,6 @@ proguard混淆配置文件增加：
     @android.webkit.JavascriptInterface <methods>;
 }
 ```
-因为DEMO是开源的，如果您把验证码的包名修改掉了，例如改为了：
-```
-com.xxxa.xxxb.captcha
-```
-那么proguard混淆配置文件就需要对应的改为：
-```
--keep public class com.xxxa.xxxb.captcha.**{*;}
-```
-
-
 
 ## 五、常见问题
 ### 1、js错误找不到onValidate
