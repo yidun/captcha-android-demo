@@ -147,13 +147,12 @@ proguard混淆配置文件增加：
 
 ## 效果演示
 ### 1、拖动
-![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/Screenshot_1482991322.png)
-![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/style_drag.png)
-![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/Screenshot_1482991371.png)
-
-### 2、点选
-![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/style_select.png)
-
-### 3、短信
-![](https://github.com/yidun/captcha-android-demo/raw/master/screenshots/style_msg.png)
+![](https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Screenshot_demo_main_ui.jpg)
+![](https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Screenshot_demo_slide.jpg)
+### 2、自定义滑动条icon
+![](https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Screenshot_demo_custom_slide_bar.jpg)
+### 3、自定义语言类型
+![](https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Screenshot_demo_custom_lang.jpg)
+### 4、点选
+![](https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Screenshot_demo_click.jpg)
 
