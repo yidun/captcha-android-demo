@@ -31,10 +31,10 @@ final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .timeout(1000 * 10) // 超时时间，一般无需设置
                         .languageType(langType) // 验证码语言类型，一般无需设置，可设置值请参看下面验证码语言枚举类介绍
                         .debug(true) // 是否启用debug模式，一般无需设置
-                        .position(-1, -1, 0, 0) // 设置验证码框的位置和宽度，一般无需设置，不推荐设置宽高，后面将逐步废弃该接口
+                        .position(-1, -1, 0, 0) // 设置验证码框的位置和宽度，一般无需设置，不推荐设置宽高，后面将会将逐步废弃该接口
                         .controlBarImageUrl(controlBarStartUrl, controlBarMovingUrl, controlBarErrorUrl) // 自定义验证码滑动条滑块的不同状态图片
                         .backgroundDimAmount(dimAmount) // 验证码框遮罩层透明度，一般无需设置
-                        .build(context);
+                        .build(context); // Context，请使用Activity实例的Context
 ```
 ### 2）验证码语言枚举类
 在上述构建验证码属性配置类CaptchaConfiguration的languageType属性时，其值为CaptchaConfiguration.LangType类型，可使用如下值
@@ -96,7 +96,7 @@ final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .captchaId(noSenseCaptchaId)// 验证码业务id
                         .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE)  // 验证码类型，默认为传统验证码，如果要使用无感知请设置该类型，否则无需设置
                         .listener(captchaListener) //设置验证码回调监听器
-                        .build(context);
+                        .build(context); // Context，请使用Activity实例的Context
 // 初始化验证码
 final Captcha captcha = Captcha.getInstance().init(configuration);
 ```
