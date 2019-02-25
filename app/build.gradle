@@ -2,9 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
     defaultConfig {
-        applicationId "nis.netease.com.captcha"
+        applicationId "com.netease.nis.smartercaptcha"
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
@@ -25,12 +24,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
-    testCompile 'junit:junit:4.12'
-    compile(name:'captcha-debug', ext: 'aar')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:25.1.1'
+    testImplementation 'junit:junit:4.12'
+    // implementation(name: 'captcha-release', ext: 'aar')
+     implementation(name: 'captcha-release_v3.0.0', ext: 'aar')
 }

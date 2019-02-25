@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_no_sense_captcha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="智能无感知" />
+
+        <Button
+            android:id="@+id/btn_traditional_captcha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="传统验证码" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/lang_spin_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/lang_spin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="设置验证码框背景遮罩层透明度，范围从0-1(仅对传统验证码有效)：" />
+
+        <EditText
+            android:id="@+id/et_bg_dim"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:ems="10"
+            android:text="0.5" />
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/switch_control_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="滑块是否启用自定义图片" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="slideIcon Url:" />
+
+                <EditText
+                    android:id="@+id/et_slide_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="https://www.baidu.com/img/bd_logo1.png" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="slideIconMove Url:" />
+
+                <EditText
+                    android:id="@+id/slide_icon_move"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="https://www.baidu.com/img/bd_logo1.png" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="slideIconError Url:" />
+
+                <EditText
+                    android:id="@+id/slide_icon_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="https://www.baidu.com/img/bd_logo1.png" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Switch
+        android:id="@+id/switch_dev_url"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="启用开发者模式修改url(该功能仅供内部开发人员和测试人员使用)" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="验证码Url" />
+
+        <EditText
+            android:id="@+id/et_captcha_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="内部开发者与qa可在此修改url" />
+    </LinearLayout>
+</LinearLayout>

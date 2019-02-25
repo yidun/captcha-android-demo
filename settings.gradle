@@ -1,1 +1,1 @@
-include ':app', ':captcha'
+include ':app'
