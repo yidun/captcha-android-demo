@@ -26,14 +26,18 @@ compile(name:'captcha-release', ext: 'aar')//aar名称和版本号以下载下�
 final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .captchaId(noSenseCaptchaId)// 验证码业务id
                         .url(captchaUrl) // 接入者无需设置，该接口为调试接口
-                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE) // 验证码类型，默认为普通验证码，如果要使用无感知请设置该类型，否则无需设置
+                        // 验证码类型，默认为传统验证码，如果要使用无感知请设置以下类型,否则请不要设置
+                        .mode(CaptchaConfiguration.ModeType.MODE_INTELLIGENT_NO_SENSE)
                         .listener(captchaListener) // 验证码回调监听器
                         .timeout(1000 * 10) // 超时时间，一般无需设置
                         .languageType(langType) // 验证码语言类型，一般无需设置，可设置值请参看下面验证码语言枚举类介绍
                         .debug(true) // 是否启用debug模式，一般无需设置
-                        .position(-1, -1, 0, 0) // 设置验证码框的位置和宽度，一般无需设置，不推荐设置宽高，后面将会将逐步废弃该接口
-                        .controlBarImageUrl(controlBarStartUrl, controlBarMovingUrl, controlBarErrorUrl) // 自定义验证码滑动条滑块的不同状态图片
+                        // 设置验证码框的位置和宽度，一般无需设置，不推荐设置宽高，后面将逐步废弃该接口
+                        .position(-1, -1, 0, 0)
+                        // 自定义验证码滑动条滑块的不同状态图片
+                        .controlBarImageUrl(controlBarStartUrl, controlBarMovingUrl, controlBarErrorUrl)
                         .backgroundDimAmount(dimAmount) // 验证码框遮罩层透明度，一般无需设置
+                        .touchOutsideDisappear(isTouchOutsideDisappear)  // 点击验证码框外部是否消失，默认为系统默认配置(消失)，设置false不消失
                         .build(context); // Context，请使用Activity实例的Context
 ```
 ### 2）验证码语言枚举类
@@ -50,6 +54,18 @@ final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
         LANG_FR,    // 法语
         LANG_AR,    // 阿拉伯语
         LANG_RU;    // 俄语 
+        LANG_DE,    // 德语
+        LANG_IT,    // 意大利语
+        LANG_HE,    // 希伯来语
+        LANG_HI,    // 印地语
+        LANG_ID,    // 印尼语
+        LANG_MY,    // 缅甸语
+        LANG_LO,    // 老挝语
+        LANG_MS,    // 马来语
+        LANG_PL,    // 波兰语
+        LANG_PT,    // 葡萄牙语
+        LANG_ES,    // 西班牙语
+        LANG_TR,    // 土耳其语
 
         private LangType() {
         }
@@ -74,20 +90,26 @@ captcha.validate();
             @Override
             public void onValidate(String result, String validate, String msg) {
                 if (!TextUtils.isEmpty(validate)) {
-                    Toast.makeText(getApplicationContext(), "验证成功", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "验证成功:" + validate, Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "验证失败", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onError(String msg) {
-                Toast.makeText(getApplicationContext(), "验证出错" + msg, Toast.LENGTH_LONG).show();
+            public void onError(int code, String msg) {
+                Log.e("Captcha", "验证出错，错误码:" + code + " 错误信息:" + msg);
+                Toast.makeText(getApplicationContext(), "验证出错，错误码:" + code + " 错误信息:" + msg, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onCancel() {
 
+            }
+
+            @Override
+            public void onClose() {
+                Toast.makeText(getApplicationContext(), "用户关闭验证码", Toast.LENGTH_LONG).show();
             }
         };
 	
