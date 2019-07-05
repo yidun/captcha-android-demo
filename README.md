@@ -38,6 +38,8 @@ final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .controlBarImageUrl(controlBarStartUrl, controlBarMovingUrl, controlBarErrorUrl)
                         .backgroundDimAmount(dimAmount) // 验证码框遮罩层透明度，一般无需设置
                         .touchOutsideDisappear(isTouchOutsideDisappear)  // 点击验证码框外部是否消失，默认为系统默认配置(消失)，设置false不消失
+                        .useDefaultFallback(true) // 是否使用默认降级方案，默认开启
+                        .failedMaxRetryCount(failedMaxRetryCount) // 当出现服务不可用时，尝试加载的最大次数，超过此次数仍然失败将触发降级，默认3次
                         .build(context); // Context，请使用Activity实例的Context
 ```
 ### 2）验证码语言枚举类
