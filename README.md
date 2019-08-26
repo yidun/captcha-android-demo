@@ -130,7 +130,14 @@ final Captcha captcha = Captcha.getInstance().init(configuration);
 ```
 captcha.validate();
 ```
-
+### 3、Destroy验证码资源
+```
+@Override
+protected void onDestroy() {  // 在初始化验证码的Activity的onDestroy方法中调用，避免内存泄漏
+    super.onDestroy();
+    Captcha.getInstance().destroy();
+}
+```
 
 ## 四、混淆配置
 proguard混淆配置文件增加：
