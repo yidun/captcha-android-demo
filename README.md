@@ -175,8 +175,7 @@ proguard混淆配置文件增加：
 ```
 请参考[混淆配置]一节。
 
-## [Change Log][ChangeLog.md]
-
+## [Change Log](./ChangeLog.md)
 
 ## 效果演示
 ### 1、拖动
