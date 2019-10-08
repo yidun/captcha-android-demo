@@ -175,6 +175,8 @@ proguard混淆配置文件增加：
 ```
 请参考[混淆配置]一节。
 
+## [Change Log][ChangeLog.md]
+
 
 ## 效果演示
 ### 1、拖动
@@ -185,4 +187,3 @@ proguard混淆配置文件增加：
 ![](https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Screenshot_demo_click.jpg)
 ### 4、短信上行
 ![](https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Screenshot_demo_sms.jpg)
-
