@@ -40,9 +40,36 @@ final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .touchOutsideDisappear(isTouchOutsideDisappear)  // 点击验证码框外部是否消失，默认为系统默认配置(消失)，设置false不消失
                         .useDefaultFallback(true) // 是否使用默认降级方案，默认开启
                         .failedMaxRetryCount(failedMaxRetryCount) // 当出现服务不可用时，尝试加载的最大次数，超过此次数仍然失败将触发降级，默认3次
+                        .hideCloseButton(false)
+                        .loadingText(etLoadingText.getText().toString()) // 设置loading文案
+                        .loadingAnimResId(loadingAnimResId) // 设置loading动画，传入动画资源id
+                        // 以下为私有化部署相关接口，非私有化场景无需设置
+                        // -------私有化相关配置开始-------
+                        .apiServer(apiServer) // 私有化部署时apiServer配置项
+                        .staticServer(staticServer) // 私有化部署时staticServer配置项
+                        .protocol("http") // 私有化部署时网络协议配置项，只支持"http"与"https",默认为https
+                        // -------私有化相关配置结束-------
                         .build(context); // Context，请使用Activity实例的Context
 ```
+**注意：**
+
+对于loading文案自定义而言，如果需要支持多语言，请使用通过资源id设置文案的接口：
+
+```
+/**
+* 通过资源id的方式设置加载文案
+* 主要是为了多语言考虑，优先级高于 {@link #loadingText(String)}
+*
+* @param loadingTextId
+* @return
+*/
+public Builder loadingTextId(int loadingTextId)
+```
+
+将多语言资源文件放置到对应的语言文件夹下，调用该接口传入对应文案的语言资源id即可
+
 ### 2）验证码语言枚举类
+
 在上述构建验证码属性配置类CaptchaConfiguration的languageType属性时，其值为CaptchaConfiguration.LangType类型，可使用如下值
 ```
  public static enum LangType {
