@@ -131,14 +131,14 @@ captcha.validate();
                 Toast.makeText(getApplicationContext(), "验证出错，错误码:" + code + " 错误信息:" + msg, Toast.LENGTH_LONG).show();
             }
 
-            @Override
-            public void onCancel() {
-
-            }
 
             @Override
-            public void onClose() {
-                Toast.makeText(getApplicationContext(), "用户关闭验证码", Toast.LENGTH_LONG).show();
+            public void onClose(Captcha.CloseType closeType) {
+                if (closeType == Captcha.CloseType.USER_CLOSE) {
+                    Toast.makeText(getApplication(), "用户关闭验证码", Toast.LENGTH_LONG).show();
+                } else if (closeType == Captcha.CloseType.VERIFY_SUCCESS_CLOSE) {
+                    Toast.makeText(getApplication(), "校验通过，流程自动关闭", Toast.LENGTH_LONG).show();
+                }
             }
         };
 	
