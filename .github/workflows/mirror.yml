@@ -1,0 +1,23 @@
+name: Mirror to Gitee
+
+on: push
+
+jobs:
+
+  sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v1
+
+      - uses: spyoungtech/mirror-action@master
+
+        with:
+
+          REMOTE: https://gitee.com/netease_yidun/captcha-android-demo.git
+
+          GIT_USERNAME: ${{ secrets.GITEE_USERNAME }}
+
+          GIT_PASSWORD: ${{ secrets.GITEE_PASSWORD }}
