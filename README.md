@@ -50,11 +50,6 @@ final CaptchaConfiguration configuration = new CaptchaConfiguration.Builder()
                         .protocol("http") // 私有化部署时网络协议配置项，只支持"http"与"https",默认为https
                          // -------私有化相关配置结束-------
                         .ipv6(isIpv6) // 是否为ipv6网络
-                         // -------反作弊相关配置开始-------
-                        .wmApiServer(wmApiServer)        // 反作弊apiServer
-                        .wmConfigServer(configServer)    // 反作弊configServer
-                        .wmStaticServer(wmStaticServer)  // 反作弊staticServer
-                         // -------反作弊相关配置结束-------
                         .build(context); // Context，请使用Activity实例的Context
 ```
 **注意：**
