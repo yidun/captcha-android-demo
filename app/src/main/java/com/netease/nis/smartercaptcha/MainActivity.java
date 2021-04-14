@@ -156,10 +156,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0: {
-                        langType = CaptchaConfiguration.LangType.LANG_ZH_CN;
-                    }
-                    break;
                     case 1: {
                         langType = CaptchaConfiguration.LangType.LANG_ZH_TW;
                     }
@@ -227,13 +223,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onError(String msg) {
-                Toast.makeText(getApplicationContext(), "验证出错" + msg, Toast.LENGTH_LONG).show();
+            public void onError(int code, String msg) {
+                Toast.makeText(getApplicationContext(), "验证出错，错误码：" + code + " 错误信息：" + msg, Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onCancel() {
-
+            public void onClose(Captcha.CloseType closeType) {
+                if (closeType == Captcha.CloseType.USER_CLOSE) {
+                    Toast.makeText(getApplication(), "用户关闭验证码", Toast.LENGTH_LONG).show();
+                } else if (closeType == Captcha.CloseType.VERIFY_SUCCESS_CLOSE) {
+                    Toast.makeText(getApplication(), "校验通过，流程自动关闭", Toast.LENGTH_LONG).show();
+                } else if (closeType == Captcha.CloseType.TIP_CLOSE) {
+                    Toast.makeText(getApplication(), "loading关闭", Toast.LENGTH_LONG).show();
+                }
             }
         };
     }

@@ -28,5 +28,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:25.1.1'
     testImplementation 'junit:junit:4.12'
     // implementation(name: 'captcha-release', ext: 'aar')
-     implementation(name: 'captcha-release_v3.0.0', ext: 'aar')
+     implementation(name: 'captcha-release_v3.2.1', ext: 'aar')
 }
