@@ -1,12 +1,37 @@
 ﻿# 易盾验证码Android SDK接入指南
 
 ## 一、SDK集成
-### 1、获取SDK
+
+### 1.1 从2.2.2.1版本开始，提供远程依赖的方式，本地依赖的方式逐步淘汰。原先以本地依赖集成的想尝试远程依赖请先去除干净本地包，避免重复依赖冲突
+确认androidstudio的Project根目录的主gradle中配置了 mavenCentral 支持
+
+```
+ buildscript {
+            repositories {
+                jcenter()
+                mavenCentral()
+            }
+            ......
+        }
+
+        allprojects {
+            repositories {
+                jcenter()
+                mavenCentral()
+            }
+        }
+```
+在对应module的gradle 中添加依赖
+```
+implementation 'io.github.yidun:captcha:3.2.2'
+```
+
+### 1.2、获取SDK
 从github上下载验证码sdk的aar包
 [点我下载sdk](https://github.com/yidun/captcha-android-demo/tree/master/sdk)
 
 
-### 2、手动导入SDK
+### 1.2、手动导入SDK
 将获取的sdk的aar文件放到工程中的libs文件夹下，然后在app的build.gradle文件中增加如下代码
 ```
 repositories {
