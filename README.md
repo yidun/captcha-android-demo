@@ -3,7 +3,7 @@
 ## 一、SDK集成
 
 ### 方式一 
-#### 从3.2.2版本开始，提供远程依赖的方式，本地依赖的方式逐步淘汰。原先以本地依赖集成的想尝试远程依赖请先去除干净本地包，避免重复依赖冲突
+#### 从3.2.2.1版本开始，提供远程依赖的方式，本地依赖的方式逐步淘汰。原先以本地依赖集成的想尝试远程依赖请先去除干净本地包，避免重复依赖冲突
 确认androidstudio的Project根目录的主gradle中配置了 mavenCentral 支持
 
 ```
@@ -24,7 +24,7 @@
 ```
 在对应module的gradle 中添加依赖
 ```
-implementation 'io.github.yidun:captcha:3.2.2'
+implementation 'io.github.yidun:captcha:3.2.2.1'
 ```
 
 ### 方式二 
