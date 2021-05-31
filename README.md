@@ -24,7 +24,7 @@
 ```
 在对应module的gradle 中添加依赖
 ```
-implementation 'io.github.yidun:captcha:3.2.2.1'
+implementation 'io.github.yidun:captcha:3.2.2.2'
 ```
 
 ### 方式二 
