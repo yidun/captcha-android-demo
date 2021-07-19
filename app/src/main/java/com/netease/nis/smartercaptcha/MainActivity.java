@@ -19,9 +19,8 @@ import com.netease.nis.captcha.CaptchaConfiguration;
 import com.netease.nis.captcha.CaptchaListener;
 
 public class MainActivity extends AppCompatActivity {
-    String noSenseCaptchaId = "6a5cab86b0eb4c309ccb61073c4ab672";
-    String traditionalCaptchaId = "deecf3951a614b71b4b1502c072be1c1";
-    // String traditionalCaptchaId = "7389c04befff44f08f5d3c37fae22957"; //短信上行
+    String noSenseCaptchaId = "智能无感知易盾业务id";
+    String traditionalCaptchaId = "传统验证码易盾业务id";
     private Button btnNoSenseCaptcha;
     private Button btnTraditionalCaptcha;
     private EditText etControlBarSlide, etControlBarSlideMove, etControlBarSlideError;

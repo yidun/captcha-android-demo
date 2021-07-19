@@ -1,4 +1,4 @@
-﻿# 易盾验证码Android SDK接入指南
+# 易盾验证码Android SDK接入指南
 
 ## 一、SDK集成
 
@@ -24,7 +24,7 @@
 ```
 在对应module的gradle 中添加依赖
 ```
-implementation 'io.github.yidun:captcha:3.2.3'
+implementation 'io.github.yidun:captcha:3.2.4'
 ```
 
 ### 方式二 
