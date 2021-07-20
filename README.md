@@ -52,7 +52,8 @@ android{
 }    
 
 dependencies {
-    implementation(name: 'captcha-release-3.2.3', ext: 'aar') // aar包版本以官网下载下来为准
+    implementation(name: 'captcha-release-3.2.4', ext: 'aar') // aar包版本以官网下载下来为准
+    implementation(name: 'base-core-1.0.3', ext: 'aar')
 }
 ```
 
