@@ -1,4 +1,4 @@
-# 行为式验证码
+﻿# 行为式验证码
 全新人机验证方式，高效拦截机器行为，业务安全第一道防线。搭载风险感知引擎，智能切换验证难度，安全性高，极致用户体验。读屏软件深度适配，视障群体也可轻松使用，符合工信部无障碍适配要求
 
 ## 兼容性
@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.2.4'
+implementation 'io.github.yidun:captcha:3.2.5'
 ```
 ### 本地手动依赖
 

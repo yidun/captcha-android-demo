@@ -52,3 +52,9 @@
 - 在加载loading框时如果用户主动关闭loading框，则取消验证码加载
 - loading框样式优化，避免在某些机型上loading框边角会出现黑色阴影
 
+### v3.2.4
+去除 AndroidX
+
+### v3.2.5
+Android 12 适配
+
