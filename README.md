@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.2.5'
+implementation 'io.github.yidun:captcha:3.2.7'
 ```
 ### 本地手动依赖
 
@@ -253,6 +253,8 @@ public enum CloseType {
 ### 3. 弹出验证码
 
 #### 代码说明
+
+验证码验证成功之后，页面停留500毫秒之后再关闭验证码，⚠️该属性只适用于传统验证码，使用时请设置mode为 NTESVerifyCodeNormal
 
 ```
 captcha.validate()
