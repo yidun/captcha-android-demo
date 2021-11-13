@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.2.7'
+implementation 'io.github.yidun:captcha:3.3.0'
 ```
 ### 本地手动依赖
 
@@ -260,10 +260,34 @@ public enum CloseType {
 captcha.validate()
 ```
 
-### 4. 关闭验证码相关资源
+### 4. 横竖屏切换
+
+在 AndroidManifest 设置对应 Activity 的 configChanges 为
+
+```
+ android:configChanges="keyboardHidden|orientation|screenSize"
+```
+
+#### 代码说明
+
+在 onConfigurationChanged 生命周期中调用
+
+```
+captcha.changeDialogLayout()
+```
+
+### 5. 关闭验证码相关资源（建议放在onDestroy）
 
 #### 代码说明
 
 ```
 captcha.destroy()
+```
+
+### 6. 单独关闭所有验证码相关 Dialog
+
+#### 代码说明
+
+```
+captcha.dismissAllDialog()
 ```
