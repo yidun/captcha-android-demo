@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.3.0'
+implementation 'io.github.yidun:captcha:3.3.0.1'
 ```
 ### 本地手动依赖
 
