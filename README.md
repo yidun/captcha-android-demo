@@ -149,7 +149,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | languageType | langType:LangType | 否 | LangType.LANG_ZH_CN:中文 | 语言类型：枚举值 |
 | touchOutsideDisappear | isDisappear:boolean | 否 | true | 触摸外部是否关闭弹窗 |
 | useDefaultFallback | useDefaultFallback:boolean | 否 | true | 是否采用默认降级 |
-| failedMaxRetryCount | failedMaxRetryCount:int | 否 | 3 | 失败后尝试最大次数 |
+| failedMaxRetryCount | failedMaxRetryCount:int | 否 | 3 | 触发降级的最大错误次数，当超过这个错误次数时触发降级 |
 | hideCloseButton | isHideCloseButton:boolean | 否 | false | 是否隐藏关闭按钮 |
 | protocol | protocol:String | 否 | https | 资源加载协议: http 或 https |
 | loadingText | text:String | 否 | 无 | 加载文案 |
