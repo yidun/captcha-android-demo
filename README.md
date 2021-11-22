@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.3.0.1'
+implementation 'io.github.yidun:captcha:3.3.1'
 ```
 ### 本地手动依赖
 
@@ -152,8 +152,9 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | failedMaxRetryCount | failedMaxRetryCount:int | 否 | 3 | 触发降级的最大错误次数，当超过这个错误次数时触发降级 |
 | hideCloseButton | isHideCloseButton:boolean | 否 | false | 是否隐藏关闭按钮 |
 | protocol | protocol:String | 否 | https | 资源加载协议: http 或 https |
-| loadingText | text:String | 否 | 无 | 加载文案 |
+| loadingText | text:String | 否 | 无 | 加载弹窗的加载文案 |
 | loadingTextId | loadingTextId:int | 否 | 无 | 资源id的方式设置加载文案，优先级高于loadingText |
+| loadingParam | width:int,height:int | 否 | 0 | 加载弹窗的宽高 |
 | loadingAnimResId | loadingAnimResId:int | 否 | 无 | 加载动画，支持animation-list不支持gif |
 
 ##### ModeType 枚举类说明
