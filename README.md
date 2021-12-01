@@ -277,7 +277,7 @@ captcha.validate()
 captcha.changeDialogLayout()
 ```
 
-### 5. 释放验证码相关资源（建议放在onDestroy）
+### 5. 释放验证码相关资源
 
 #### 代码说明
 
