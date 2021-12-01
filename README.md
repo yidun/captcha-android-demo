@@ -277,7 +277,7 @@ captcha.validate()
 captcha.changeDialogLayout()
 ```
 
-### 5. 释放验证码相关资源
+### 5. 释放验证码相关资源（正常情况无需调用）
 
 #### 代码说明
 
@@ -285,7 +285,7 @@ captcha.changeDialogLayout()
 captcha.destroy()
 ```
 
-### 6. 单独关闭所有验证码相关 Dialog
+### 6. 单独关闭所有验证码相关 Dialog（正常情况无需调用）
 
 #### 代码说明
 
