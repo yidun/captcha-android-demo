@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.3.1.2'
+implementation 'io.github.yidun:captcha:3.3.3'
 ```
 ### 本地手动依赖
 
@@ -155,6 +155,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | loadingText | text:String | 否 | 无 | 加载弹窗的加载文案 |
 | loadingTextId | loadingTextId:int | 否 | 无 | 资源id的方式设置加载文案，优先级高于loadingText |
 | loadingAnimResId | loadingAnimResId:int | 否 | 无 | 加载动画，支持animation-list不支持gif |
+| extraData | extraData:String | 否 | 无 | 额外参数，在二次校验result返回/3.3.3版本加入 |
 
 ##### ModeType 枚举类说明
 
