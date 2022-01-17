@@ -255,7 +255,7 @@ public enum CloseType {
 
 ##### ⚠️注意
 
-从Android 9.0开始Webview默认支持http资源，若私有化配置是http资源需要在Manifest添加如下配置
+从Android 9.0开始Webview默认不支持http资源，若私有化配置是http资源需要在Manifest添加如下配置
 
 ```
  <application
