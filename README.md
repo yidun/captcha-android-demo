@@ -156,6 +156,8 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | loadingTextId | loadingTextId:int | 否 | 无 | 资源id的方式设置加载文案，优先级高于loadingText |
 | loadingAnimResId | loadingAnimResId:int | 否 | 无 | 加载动画，支持animation-list不支持gif |
 | extraData | extraData:String | 否 | 无 | 额外参数，在二次校验result返回/3.3.3版本加入 |
+| apiServer | apiServer:String | 否 | 无 | 私有化接口域名，私有化部署必须，协议需要和protocol对应 |
+| staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
 
 ##### ModeType 枚举类说明
 
@@ -251,6 +253,15 @@ public enum CloseType {
 }
 ```
 
+##### 注意
+
+从Android 9.0开始Webview默认支持http资源，若私有化配置是http资源需要在Manifest添加如下配置
+
+```
+ <application
+    android:usesCleartextTraffic="true"
+ />
+```
 ### 3. 弹出验证码
 
 #### 代码说明
