@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.3.5'
+implementation 'io.github.yidun:captcha:3.3.6'
 ```
 ### 本地手动依赖
 
@@ -146,7 +146,8 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | controlBarImageUrl | startIconUrl:String,movingIconUrl:String,errorIconUrl:String | 否 | 无 | 验证码控制条的滑块的图片 |
 | position | xCoordinate:int,yCoordinate:int | 否 | -1，-1 | 验证码弹窗位置 |
 | debug | isEnableDebug:boolean | 否 | false | 是否启用debug模式 |
-| languageType | langType:LangType | 否 | LangType.LANG_ZH_CN:中文 | 语言类型：枚举值 |
+| languageType | langType:LangType | 否 | 系统语言 | 语言类型：枚举值 |
+| theme | theme:Theme | 否 | Theme.LIGHT | 主题 |
 | touchOutsideDisappear | isDisappear:boolean | 否 | true | 触摸外部是否关闭弹窗 |
 | useDefaultFallback | useDefaultFallback:boolean | 否 | true | 是否采用默认降级 |
 | failedMaxRetryCount | failedMaxRetryCount:int | 否 | 3 | 触发降级的最大错误次数，当超过这个错误次数时触发降级 |
@@ -174,32 +175,100 @@ public enum ModeType {
 }
 ```
 
+##### Theme 枚举类说明
+
+```
+    // 主题
+    public enum Theme {
+        // 正常
+        LIGHT,
+        // 暗黑
+        DARK
+    }
+```
+
 #### LangType 枚举值说明
 
 ```
 public enum LangType {
-        LANG_ZH_CN,//中文简体
-        LANG_ZH_TW,//中文繁体
-        LANG_EN,//英文
-        LANG_JA,//日文
-        LANG_KO,//韩文
-        LANG_TH,//泰语
-        LANG_VI,//越南语
-        LANG_FR,//法语
+        LANG_AM,// 阿姆哈拉语
         LANG_AR,//阿拉伯语
-        LANG_RU,//俄语
+        LANG_AS,//阿萨姆语
+        LANG_AZ,//阿塞拜疆语
+        LANG_BE,//白俄罗斯语
+        LANG_BG,//保加利亚语
+        LANG_BN,//孟加拉语
+        LANG_BO,//藏语
+        LANG_BS,//波斯尼亚语
+        LANG_CA,//加泰罗尼亚语
+        LANG_CS,//捷克语
+        LANG_DA,//丹麦语
         LANG_DE,//德语
+        LANG_EL,//希腊语
+        LANG_EN,//英文
+        LANG_EN_US,//英语/美国
+        LANG_ES,//西班牙语
+        LANG_ES_LA,//西班牙语/拉美
+        LANG_ET,//爱沙尼亚语
+        LANG_EU,//巴斯克语
+        LANG_FA,//波斯语
+        LANG_FI,//芬兰语
+        LANG_FR,//法语
+        LANG_GL,//加利西亚语
+        LANG_GU,//古吉拉特语
+        LANG_HI,//印地语
+        LANG_HR,//克罗地亚
+        LANG_HU,//匈牙利语
+        LANG_ID,//印尼语
         LANG_IT,//意大利语
         LANG_HE,//希伯来语
-        LANG_HI,//印地语
-        LANG_ID,//印尼语
-        LANG_MY,//缅甸语
+        LANG_JA,//日文
+        LANG_JV,//爪哇语
+        LANG_KA,//格鲁吉亚语
+        LANG_KK,//哈萨克语
+        LANG_KM,//高棉语
+        LANG_KN,//卡纳达语
+        LANG_KO,//韩文
         LANG_LO,//老挝语
-        LANG_MS,//马来语
+        LANG_LT,//立陶宛语
+        LANG_LV,//拉脱维亚语
+        LANG_MAI,//迈蒂利语
+        LANG_MI,//毛利语
+        LANG_MK,//马其顿语
+        LANG_ML,//马拉亚拉姆语
+        LANG_MN,//蒙古语
+        LANG_MR,//马拉地语
+        LANG_MS,//马来西亚语
+        LANG_MY,//缅甸语
+        LANG_NO,//挪威语
+        LANG_NE,//尼泊尔语
+        LANG_NL,//荷兰语
+        LANG_OR,//欧里亚语
+        LANG_PA,//旁遮普语
         LANG_PL,//波兰语
         LANG_PT,//葡萄牙语
-        LANG_ES,//西班牙语
+        LANG_PT_BR,//葡萄牙语/巴西
+        LANG_RO,//罗马西亚语
+        LANG_RU,//俄语
+        LANG_SI,//僧加罗语
+        LANG_SK,//斯洛伐克语
+        LANG_SL,//斯洛文尼亚语
+        LANG_SR,//塞尔维亚语
+        LANG_SV,//瑞典语
+        LANG_SW,//斯瓦希里语
+        LANG_TA,//泰米尔语
+        LANG_TE,//泰卢固语
+        LANG_TH,//泰语
+        LANG_FIL,//菲律宾语
         LANG_TR,//土耳其语
+        LANG_UG,//维吾尔语
+        LANG_UK,//乌克兰语
+        LANG_UR,//乌尔都语
+        LANG_UZ,//乌兹别克语
+        LANG_VI,//越南语
+        LANG_ZH_CN,//中文简体
+        LANG_ZH_HK,//中国香港
+        LANG_ZH_TW,//中国台湾
 }
 ```
 ##### CaptchaListener 接口说明
