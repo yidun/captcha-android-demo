@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.3.6'
+implementation 'io.github.yidun:captcha:3.3.7'
 ```
 ### 本地手动依赖
 
@@ -157,6 +157,8 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | loadingTextId | loadingTextId:int | 否 | 无 | 资源id的方式设置加载文案，优先级高于loadingText |
 | loadingAnimResId | loadingAnimResId:int | 否 | 无 | 加载动画，支持animation-list不支持gif |
 | extraData | extraData:String | 否 | 无 | 额外参数，在二次校验result返回/3.3.3版本加入 |
+| size | size:String | 否 | 系统字体大小 | 字体大小，只支持small,medium,large,x-large |
+| isCloseButtonBottom | isCloseButtonBottom:boolean | 否 | false | 关闭按钮是否在下方 |
 | apiServer | apiServer:String | 否 | 无 | 私有化接口域名，私有化部署必须，协议需要和protocol对应 |
 | staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
 
