@@ -173,8 +173,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | setControlBarBackground | controlBarBackground:String | 否 | 无 | controlBar背景颜色 |
 | setControlBarBorderColorMoving | controlBarBorderColorMoving:String | 否 | 无 | controlBar滑动时边框颜色，滑动类型验证码下有效 |
 | setControlBarBackgroundMoving | controlBarBackgroundMoving:String | 否 | 无 | controlBar滑动时背景颜色，滑动类型验证码下有效 |
-| setControlBarBorderColorSuccess | controlBarBorderColorSuccess:String | 否 | 无 | controlBar 成功时边框颜色，此颜色同步了文字成功时文字颜色、滑块背景颜色
- |
+| setControlBarBorderColorSuccess | controlBarBorderColorSuccess:String | 否 | 无 | controlBar 成功时边框颜色，此颜色同步了文字成功时文字颜色、滑块背景颜色|
 | setControlBarBackgroundSuccess | controlBarBackgroundSuccess:String | 否 | 无 | controlBar 成功时背景颜色 |
 | setControlBarBorderColorError | controlBarBorderColorError:String | 否 | 无 | controlBar 失败时边框颜色 |
 | setControlBarBackgroundError | controlBarBackgroundError:String | 否 | 无 | controlBar 失败时背景颜色 |
