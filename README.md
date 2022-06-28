@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.3.9'
+implementation 'io.github.yidun:captcha:3.4.0'
 ```
 ### 本地手动依赖
 
@@ -161,6 +161,45 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | isShowLoading | isShowLoading:boolean | 否 | true | 是否显示loading效果 |
 | apiServer | apiServer:String | 否 | 无 | 私有化接口域名，私有化部署必须，协议需要和protocol对应 |
 | staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
+
+高级ui配置
+
+| 配置项 |参数/类型|是否必须|默认值|描述|
+|----|----|--------|------|----|
+| setImagePanelBorderRadius | imagePanelBorderRadius:String | 否 | 无 | imagePanel 的圆角 |
+| setControlBarHeight | controlBarHeight:String | 否 | 无 | controlBar高度 | 
+| setControlBarBorderRadius | controlBarBorderRadius:String | 否 | 无 | controlBar圆角 |
+| setControlBarBorderColor | controlBarBorderColor:String | 否 | 无 | controlBar边框颜色 |
+| setControlBarBackground | controlBarBackground:String | 否 | 无 | controlBar背景颜色 |
+| setControlBarBorderColorMoving | controlBarBorderColorMoving:String | 否 | 无 | controlBar滑动时边框颜色，滑动类型验证码下有效 |
+| setControlBarBackgroundMoving | controlBarBackgroundMoving:String | 否 | 无 | controlBar滑动时背景颜色，滑动类型验证码下有效 |
+| setControlBarBorderColorSuccess | controlBarBorderColorSuccess:String | 否 | 无 | controlBar 成功时边框颜色，此颜色同步了文字成功时文字颜色、滑块背景颜色
+ |
+| setControlBarBackgroundSuccess | controlBarBackgroundSuccess:String | 否 | 无 | controlBar 成功时背景颜色 |
+| setControlBarBorderColorError | controlBarBorderColorError:String | 否 | 无 | controlBar 失败时边框颜色 |
+| setControlBarBackgroundError | controlBarBackgroundError:String | 否 | 无 | controlBar 失败时背景颜色 |
+| setControlBarSlideBackground | controlBarSlideBackground:String | 否 | 无 | controlBar 滑块背景颜色 |
+| setControlBarTextSize | controlBarTextSize:String | 否 | 无 | controlBar 内容文本大小 |
+| setControlBarTextColor | controlBarTextColor:String | 否 | 无 | controlBar 内容文本颜色（滑块滑动前的颜色，失败、成功前的颜色） |
+| setGap | gap:String | 否 | 无 | imagePanel 相对 controlBar 的间距大小 |
+| setExecuteBorderRadius | executeBorderRadius:String | 否 | 无 | imagePanel 顶部的操作按钮圆角大小 |
+| setExecuteBackground | executeBackground:String | 否 | 无 | imagePanel 顶部的操作按钮背景色 |
+| setExecuteTop | executeTop:String | 否 | 无 | imagePanel 顶部的操作按钮外层容器距离 imgagePanel 顶部距离 |
+| setExecuteRight | executeRight:String | 否 | 无 | imagePanel 顶部的操作按钮外层容器距离 imgagePanel 右侧距离 |
+| setCapBarHeight | capBarHeight:int | 否 | 无 | 弹框头部标题所在容器高度 |
+| setCapBarTextAlign | capBarTextAlign:String | 否 | 无 | 弹框头部标题文字对齐方式，可选值为 left center right |
+| setCapBarBorderColor | capBarBorderColor:String | 否 | 无 | 弹框头部下边框颜色，想要去掉的话可取 transparent 或者与背景色同色 #fff |
+| setCapBarTextColor | capBarTextColor:String | 否 | 无 | 弹框头部标题文字颜色 |
+| setCapBarTextSize | capBarTextSize:int | 否 | 无 | 弹框头部标题文字字体大小 |
+| setCapBarTextWeight | capBarTextWeight:String | 否 | 无 | 弹框头部标题文字字体体重，可设置粗细，参考：https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight |
+| setCapPadding | capPadding:int | 否 | 无 | 验证码弹框 body 部分的内边距，相当于总体设置 capPaddingTop，capPaddingRight，capPaddingBottom，capPaddingLeft |
+| setCapPaddingTop | capPaddingTop:int | 否 | 无 | 验证码弹框 body 部分的【上】内边距，覆盖 capPadding 对于上内边距的设置 |
+| setCapPaddingRight | capPaddingRight:int | 否 | 无 | 验证码弹框 body 部分的【右】内边距，覆盖 capPadding 对于右内边距的设置 |
+| setCapPaddingBottom | capPaddingBottom:int | 否 | 无 | 验证码弹框 body 部分的【底】内边距，覆盖 capPadding 对于底内边距的设置 |
+| setCapPaddingLeft | capPaddingLeft:int | 否 | 无 | 验证码弹框 body 部分的【左】内边距，覆盖 capPadding 对于左内边距的设置 |
+| setRadius | radius:int | 否 | 无 | 弹框圆角 |
+| setPaddingTop | paddingTop:int | 否 | 无 | 弹框【上】内边距，实践时候可与 capPaddingTop 配合 |
+| setPaddingBottom | paddingBottom:int | 否 | 无 | 弹框【下】内边距，实践时候可与 capPaddingBottom 配合 |
 
 ##### ModeType 枚举类说明
 
