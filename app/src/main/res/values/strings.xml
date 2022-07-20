@@ -1,3 +1,77 @@
 <resources>
-    <string name="app_name">SmarterCaptcha</string>
+    <string name="app_name">行为式验证码</string>
+    <string name="title_home">体验</string>
+    <string name="title_setting">验证码设置</string>
+    <string name="title_env">环境</string>
+
+    <string name="home_title">易盾验证码</string>
+    <string name="home_show">点击显示验证码</string>
+    <string name="home_verify">提交二次验证</string>
+
+    <string name="settings_title_language">语言</string>
+    <string name="settings_title_switch">开关</string>
+    <string name="settings_language_input">输入语言</string>
+    <string name="settings_switch_background">点击背景取消</string>
+    <string name="settings_switch_theme">暗黑模式</string>
+    <string name="settings_switch_loading">loading显示</string>
+    <string name="settings_switch_loading_img">自定义loading加载图</string>
+    <string name="settings_switch_btn">不显示关闭按钮</string>
+    <string name="settings_switch_btn_bottom">关闭按钮在下方</string>
+    <string name="settings_size">字体大小</string>
+    <string name="settings_super">高级样式设置</string>
+    <string name="settings_super_custom">customStyle</string>
+    <string name="settings_super_popup">popupStyle</string>
+
+    <string name="settings_default_custom">"{\n"
+            "    imagePanel: {\n"
+            "      align: 'top',\n"
+            "      borderRadius: '10px'\n"
+            "    },\n"
+            "    controlBar: {\n"
+            "      height: '40px',\n"
+            "      borderRadius: '20px',\n"
+            "      borderColor: 'transparent',\n"
+            "      background: '#e1c1ff',\n"
+            "      borderColorMoving: '#0000ff',\n"
+            "      backgroundMoving: 'rgba(0, 0, 255, 0.1)',\n"
+            "      borderColorSuccess: '#00ff00',\n"
+            "      backgroundSuccess: 'rgba(0, 255, 0, 0.1)',\n"
+            "      borderColorError: '#ff0000',\n"
+            "      backgroundError: 'rgba(255, 0, 0, 0.1)',\n"
+            "      slideBackground: '#fff',\n"
+            "      textSize: '14px',\n"
+            "      textColor: 'orange'\n"
+            "    },\n"
+            "    gap: '30px',\n"
+            "    executeBorderRadius: '4px',\n"
+            "    executeBackground: 'rgba(0, 0, 0, 0.2)',\n"
+            "    executeTop: '4px',\n"
+            "    executeRight: '4px'\n"
+            "  }"</string>
+
+    <string name="settings_default_popup">"{\n"
+            "    capBarHeight: 50,\n"
+            "    capBarTextAlign: 'center',\n"
+            "    capBarBorderColor: '#fff',\n"
+            "    capBarTextColor: '#333',\n"
+            "    capBarTextSize: 18,\n"
+            "    capBarTextWeight: 600,\n"
+            "    capPadding: 15,\n"
+            "    capPaddingTop: 0,\n"
+            "    capPaddingRight: 15,\n"
+            "    capPaddingBottom: 0,\n"
+            "    capPaddingLeft: 15,\n"
+            "    opacity: 0.1,\n"
+            "    radius: 20,\n"
+            "    paddingTop: 20,\n"
+            "    paddingBottom: 40\n"
+            "  }"</string>
+
+    <string name="settings_title_env">环境设置</string>
+    <string name="settings_env_apiServer">apiServer</string>
+    <string name="settings_env_staticServer">staticServer</string>
+    <string name="settings_env_demoServer">demoServer</string>
+    <string name="settings_env_default_apiServer">c.dun.163yun.com</string>
+    <string name="settings_env_default_staticServer">cstaticdun.126.net</string>
+    <string name="settings_env_default_demoServer">https://nctest-captcha.dun.163yun.com</string>
 </resources>

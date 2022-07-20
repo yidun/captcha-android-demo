@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#232323</color>
+    <color name="colorPrimaryDark">#303030</color>
+    <color name="colorAccent">#008577</color>
+    <color name="tvColor">#ffffff</color>
+    <color name="btn_home">#169BD5</color>
+</resources>

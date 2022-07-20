@@ -1,0 +1,100 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_title_language">
+
+        <ListPreference
+            app:defaultValue="default"
+            app:entries="@array/settings_language_key"
+            app:entryValues="@array/settings_language_values"
+            app:iconSpaceReserved="false"
+            app:key="settings_language"
+            app:title="@string/settings_title_language"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_title_switch">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="settings_switch_background"
+            app:title="@string/settings_switch_background" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="settings_switch_theme"
+            app:title="@string/settings_switch_theme" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="settings_switch_loading"
+            app:title="@string/settings_switch_loading" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="settings_switch_loading_img"
+            app:title="@string/settings_switch_loading_img" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="settings_switch_btn"
+            app:title="@string/settings_switch_btn" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:iconSpaceReserved="false"
+            app:key="settings_switch_btn_bottom"
+            app:title="@string/settings_switch_btn_bottom" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_size">
+
+        <ListPreference
+            app:defaultValue="small"
+            app:entries="@array/settings_size"
+            app:entryValues="@array/settings_size_value"
+            app:iconSpaceReserved="false"
+            app:key="settings_size"
+            app:title="@string/settings_size"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_super">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="settings_switch_super"
+            app:title="@string/settings_super" />
+
+        <EditTextPreference
+            android:defaultValue="@string/settings_default_custom"
+            android:inputType="text"
+            app:iconSpaceReserved="false"
+            app:key="settings_super_custom"
+            app:title="@string/settings_super_custom"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:defaultValue="@string/settings_default_popup"
+            android:inputType="text"
+            app:iconSpaceReserved="false"
+            app:key="settings_super_popup"
+            app:title="@string/settings_super_popup"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

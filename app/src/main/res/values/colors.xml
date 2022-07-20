@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorProgress">#ff0ac8b4</color>
+    <color name="color_black">#9f000000</color>
+    <color name="color_666666">#666666</color>
+
+    <color name="tvColor">#000000</color>
+    <color name="btn_home">#008577</color>
 </resources>

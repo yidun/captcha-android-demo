@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_title_env">
+
+        <EditTextPreference
+            android:defaultValue="@string/settings_env_default_apiServer"
+            android:inputType="text"
+            app:iconSpaceReserved="false"
+            app:key="settings_env_apiServer"
+            app:title="@string/settings_env_apiServer"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:defaultValue="@string/settings_env_default_staticServer"
+            android:inputType="text"
+            app:iconSpaceReserved="false"
+            app:key="settings_env_staticServer"
+            app:title="@string/settings_env_staticServer"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:defaultValue="@string/settings_env_default_demoServer"
+            android:inputType="text"
+            app:iconSpaceReserved="false"
+            app:key="settings_env_demoServer"
+            app:title="@string/settings_env_demoServer"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
