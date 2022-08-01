@@ -83,13 +83,13 @@ public class HomeFragment extends Fragment {
                     } else {
                         tip = "二次校验失败:" + result;
                     }
-                    Objects.requireNonNull(getActivity()).runOnUiThread(() -> Toast.makeText(getActivity(), tip, Toast.LENGTH_SHORT).show());
+                    requireActivity().runOnUiThread(() -> Toast.makeText(getActivity(), tip, Toast.LENGTH_SHORT).show());
                 }
 
                 @Override
                 public void onError(int errorCode, final String msg) {
                     Log.e(TAG, "错误码" + errorCode + "错误信息" + msg);
-                    Objects.requireNonNull(getActivity()).runOnUiThread(() -> Toast.makeText(getActivity(), "网络请求出现错误: " + msg, Toast.LENGTH_SHORT).show());
+                    requireActivity().runOnUiThread(() -> Toast.makeText(getActivity(), "网络请求出现错误: " + msg, Toast.LENGTH_SHORT).show());
                 }
             });
         });
@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
 
     private void init() {
         captcha = Captcha.getInstance();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getContext()));
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(requireContext());
         this.apiServer = preferences.getString("settings_env_apiServer", "c.dun.163yun.com");
         String staticServer = preferences.getString("settings_env_staticServer", "cstaticdun.126.net");
         this.demoServer = preferences.getString("settings_env_demoServer", "https://nctest-captcha.dun.163yun.com");

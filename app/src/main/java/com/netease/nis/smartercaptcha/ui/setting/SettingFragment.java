@@ -34,9 +34,9 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (TextUtils.equals(key, "settings_switch_theme")) {
             if (sharedPreferences.getBoolean("settings_switch_theme", false)) {
-                DarkModeUtils.applyNightMode(Objects.requireNonNull(getActivity()));
+                DarkModeUtils.applyNightMode(requireActivity());
             } else {
-                DarkModeUtils.applyDayMode(Objects.requireNonNull(getActivity()));
+                DarkModeUtils.applyDayMode(requireActivity());
             }
         }
     }
