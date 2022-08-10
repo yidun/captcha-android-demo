@@ -386,7 +386,7 @@ public enum CloseType {
 captcha.validate()
 ```
 
-### 4. 横竖屏切换
+### 4. 横竖屏折叠屏切换
 
 在 AndroidManifest 设置对应 Activity 的 configChanges 为
 
