@@ -160,6 +160,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | isCloseButtonBottom | isCloseButtonBottom:boolean | 否 | false | 关闭按钮是否在下方 |
 | isShowLoading | isShowLoading:boolean | 否 | true | 是否显示loading效果 |
 | isMourningDay | isMourningDay:boolean | 否 | false | 是否开启黑白模式 |
+| size | size:String | 否 | 系统字体 | 字体大小设置，支持small、medium、large、x-large |
 | apiServer | apiServer:String | 否 | 无 | 私有化接口域名，私有化部署必须，协议需要和protocol对应 |
 | staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
 
