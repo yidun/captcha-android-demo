@@ -30,7 +30,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.4.3'
+implementation 'io.github.yidun:captcha:3.4.4'
 ```
 ### 本地手动依赖
 
@@ -163,6 +163,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | size | size:String | 否 | 系统字体 | 字体大小设置，支持small、medium、large、x-large |
 | apiServer | apiServer:String | 否 | 无 | 私有化接口域名，私有化部署必须，协议需要和protocol对应 |
 | staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
+| isShowInnerClose | isShowInnerClose:boolean | 否 | false | 是否显示验证码内部关闭按钮 |
 
 高级ui配置
 
@@ -341,6 +342,11 @@ public interface CaptchaListener {
      * @param closeType 关闭类型枚举值，{@see Captcha#CloseType}
      */
     void onClose(Captcha.CloseType closeType);
+    /**
+     * 智能无感知验证未完成情况下二次显示验证码弹窗回调
+     * 正常情况下无需实现
+     */
+    void onCaptchaShow();
 }
 ```
 
