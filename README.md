@@ -155,7 +155,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | protocol | protocol:String | 否 | https | 资源加载协议: http 或 https |
 | loadingText | text:String | 否 | 无 | 加载弹窗的加载文案 |
 | loadingTextId | loadingTextId:int | 否 | 无 | 资源id的方式设置加载文案，优先级高于loadingText |
-| loadingAnimResId | loadingAnimResId:int | 否 | 无 | 加载动画资源，支持gif |
+| loadingAnimResId | loadingAnimResId:int | 否 | 无 | 加载动画资源id，支持gif |
 | extraData | extraData:String | 否 | 无 | 额外参数，在二次校验result返回/3.3.3版本加入 |
 | isCloseButtonBottom | isCloseButtonBottom:boolean | 否 | false | 关闭按钮是否在下方 |
 | isShowLoading | isShowLoading:boolean | 否 | true | 是否显示loading效果 |
