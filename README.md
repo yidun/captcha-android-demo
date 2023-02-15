@@ -164,6 +164,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | apiServer | apiServer:String | 否 | 无 | 私有化接口域名，私有化部署必须，协议需要和protocol对应 |
 | staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
 | isShowInnerClose | isShowInnerClose:boolean | 否 | false | 是否显示验证码内部关闭按钮 |
+| ipv6 | ipv6:boolean | 否 | false | 是否ipv6环境 |
 
 高级ui配置
 
