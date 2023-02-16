@@ -141,7 +141,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | captchaId | captchaId:String | 是 | 无 | 业务id |
 | listener | listener:CaptchaListener | 是 | 无 | 回调监听 |
 | mode | mode:ModeType | 否 | ModeType.MODE_CAPTCHA | 验证码类型：枚举值 | 
-| timeout | timeout:long | 否 | 10 | 超时时间/s |
+| timeout | timeout:long | 否 | 10s | 超时时间，单位ms |
 | backgroundDimAmount | amount:float | 否 | 0.5 | 验证码框遮罩层透明度 |
 | controlBarImageUrl | startIconUrl:String,movingIconUrl:String,errorIconUrl:String | 否 | 无 | 验证码控制条的滑块的图片 |
 | position | xCoordinate:int,yCoordinate:int | 否 | -1，-1 | 验证码弹窗位置 |
