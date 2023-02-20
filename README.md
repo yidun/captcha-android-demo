@@ -392,8 +392,6 @@ public enum CloseType {
 
 #### 代码说明
 
-验证码验证成功之后，页面停留500毫秒之后再关闭验证码，⚠️该属性只适用于传统验证码，使用时请设置mode为 MODE_CAPTCHA
-
 ```
 captcha.validate()
 ```
