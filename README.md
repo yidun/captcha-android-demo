@@ -92,7 +92,7 @@ public class DemoActivity extends AppCompatActivity {
                 captchaId("业务id").
                 listener(new CaptchaListener() {
                     @Override
-                    public void onReady() {
+                    public void onCaptchaShow() {
                     }
 
                     @Override
