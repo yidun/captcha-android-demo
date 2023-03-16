@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.4.7'
+implementation 'io.github.yidun:captcha:3.4.8'
 ```
 ### 本地手动依赖
 
@@ -167,15 +167,19 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | apiServer | apiServer:String | 否 | 无 | 私有化接口域名，私有化部署必须，协议需要和protocol对应 |
 | staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
 | isShowInnerClose | isShowInnerClose:boolean | 否 | false | 是否显示验证码内部关闭按钮 |
-| ipv6 | ipv6:boolean | 否 | false | 是否ipv6环境 |
+| canUpload | canUpload:boolean | 否 | true | 是否支持数据上报和崩溃收集 |
 
 高级ui配置
 
 | 配置项 |参数/类型|是否必须|默认值|描述|
 |----|----|--------|------|----|
+| setImagePanelAlign | imagePanelAlign:String | 否 | 无 | imagePanel 的对齐方式 |
+| setImagePanelLoadBackgroundImage | imagePanelLoadBackgroundImage:String | 否 | 无 | imagePanel 加载中时的背景图片地址 |
+| setImagePanelLoadBackgroundColor | imagePanelLoadBackgroundColor:String | 否 | 无 | imagePanel 加载中时的背景颜色 |
 | setImagePanelBorderRadius | imagePanelBorderRadius:String | 否 | 无 | imagePanel 的圆角 |
 | setControlBarHeight | controlBarHeight:String | 否 | 无 | controlBar高度 | 
 | setControlBarBorderRadius | controlBarBorderRadius:String | 否 | 无 | controlBar圆角 |
+| setControlBarPaddingLeft | controlBarPaddingLeft:String | 否 | 无 | controlBar提示文本左边距 |
 | setControlBarBorderColor | controlBarBorderColor:String | 否 | 无 | controlBar边框颜色 |
 | setControlBarBackground | controlBarBackground:String | 否 | 无 | controlBar背景颜色 |
 | setControlBarBorderColorMoving | controlBarBorderColorMoving:String | 否 | 无 | controlBar滑动时边框颜色，滑动类型验证码下有效 |
@@ -206,6 +210,10 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | setRadius | radius:int | 否 | 无 | 弹框圆角 |
 | setPaddingTop | paddingTop:int | 否 | 无 | 弹框【上】内边距，实践时候可与 capPaddingTop 配合 |
 | setPaddingBottom | paddingBottom:int | 否 | 无 | 弹框【下】内边距，实践时候可与 capPaddingBottom 配合 |
+| setBorderColor | borderColor:String | 否 | 无 | 弹框外层容器颜色 |
+| setSlideTip | slideTip:String | 否 | 无 | 滑动模块文案 |
+| setRefreshInterval | refreshInterval:int | 否 | 300 | 错误提示时长/ms |
+| isDisableFocus | disableFocus:boolean | 否 | false | input focus状态是否高亮 |
 
 ##### ModeType 枚举类说明
 
