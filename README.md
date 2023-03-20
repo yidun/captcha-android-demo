@@ -156,6 +156,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | failedMaxRetryCount | failedMaxRetryCount:int | 否 | 3 | 触发降级的最大错误次数，当超过这个错误次数时触发降级 |
 | hideCloseButton | isHideCloseButton:boolean | 否 | false | 是否隐藏关闭按钮 |
 | protocol | protocol:String | 否 | https | 资源加载协议: http 或 https |
+| ipv6 | ipv6:boolean | 否 | false | 网络是否ipv6 |
 | loadingText | text:String | 否 | 无 | 加载弹窗的加载文案 |
 | loadingTextId | loadingTextId:int | 否 | 无 | 资源id的方式设置加载文案，优先级高于loadingText |
 | loadingAnimResId | loadingAnimResId:int | 否 | 无 | 加载动画资源id，支持gif |
