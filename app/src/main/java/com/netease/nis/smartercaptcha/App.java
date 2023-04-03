@@ -6,6 +6,10 @@ import android.content.Context;
 import android.content.MutableContextWrapper;
 import android.os.Build;
 import android.webkit.WebView;
+
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
+
 import com.netease.nis.smartercaptcha.utils.DarkModeUtils;
 
 /**
@@ -14,7 +18,13 @@ import com.netease.nis.smartercaptcha.utils.DarkModeUtils;
  * @desc
  * @email liulingfeng@mistong.com
  */
-public class App extends Application {
+public class App extends MultiDexApplication {
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -191,10 +191,6 @@ public class HomeFragment extends Fragment {
         }
 
         builder.listener(new CaptchaListener() {
-            @Override
-            public void onReady() {
-                Log.i(TAG, "验证码准备完毕");
-            }
 
             @Override
             public void onValidate(String result, String validate, String msg) {
@@ -216,6 +212,11 @@ public class HomeFragment extends Fragment {
                 } else if (closeType == Captcha.CloseType.TIP_CLOSE) {
                     Log.i(TAG, "loading关闭显示验证码弹窗");
                 }
+            }
+
+            @Override
+            public void onCaptchaShow() {
+                Log.i(TAG, "验证码弹窗已显示");
             }
         });
         // 智能无感知需要设置
