@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.4.9'
+implementation 'io.github.yidun:captcha:3.5.0'
 ```
 ### 本地手动依赖
 
@@ -143,7 +143,6 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 |----|----|--------|------|----|
 | captchaId | captchaId:String | 是 | 无 | 业务id |
 | listener | listener:CaptchaListener | 是 | 无 | 回调监听 |
-| mode | mode:ModeType | 否 | ModeType.MODE_CAPTCHA | 验证码类型：枚举值 | 
 | timeout | timeout:long | 否 | 10s | 超时时间，单位ms |
 | backgroundDimAmount | amount:float | 否 | 0.5 | 验证码框遮罩层透明度 |
 | controlBarImageUrl | startIconUrl:String,movingIconUrl:String,errorIconUrl:String | 否 | 无 | 验证码控制条的滑块的图片 |
@@ -215,21 +214,6 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | setSlideTip | slideTip:String | 否 | 无 | 滑动模块文案 |
 | setRefreshInterval | refreshInterval:int | 否 | 300 | 错误提示时长/ms |
 | isDisableFocus | disableFocus:boolean | 否 | false | input focus状态是否高亮 |
-
-##### ModeType 枚举类说明
-
-```
-public enum ModeType {
-        /**
-         * 传统验证码类型
-         */
-        MODE_CAPTCHA,
-        /**
-         * 智能无感知类型
-         */
-        MODE_INTELLIGENT_NO_SENSE,
-}
-```
 
 ##### Theme 枚举类说明
 
