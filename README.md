@@ -79,6 +79,7 @@ dependencies {
     @android.webkit.JavascriptInterface <methods>;
 }
 ```
+// 项目中使用了glide 4.9.0版本，注意一下glide的混淆规则
 
 ## 快速调用示例
 
