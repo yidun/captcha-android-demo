@@ -316,9 +316,6 @@ public enum LangType {
 
 ```
 public interface CaptchaListener {
-    // 验证码准备完毕
-    void onReady();
-
     /**
      * 验证之后结果 validate 不为空则验证通过
      * @param result 结果
