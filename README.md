@@ -338,7 +338,7 @@ public interface CaptchaListener {
      */
     void onClose(Captcha.CloseType closeType);
     /**
-     * 智能无感知验证未完成情况下二次显示验证码弹窗回调
+     * 验证码弹窗回调
      * 正常情况下无需实现
      */
     void onCaptchaShow();
