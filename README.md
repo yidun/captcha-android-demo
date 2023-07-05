@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.5.0'
+implementation 'io.github.yidun:captcha:3.5.2'
 ```
 ### 本地手动依赖
 
@@ -95,7 +95,9 @@ public class DemoActivity extends AppCompatActivity {
                     @Override
                     public void onCaptchaShow() {
                     }
-
+                    @Override
+                    public void onCaptchaVisible() {
+                    }
                     @Override
                     public void onValidate(String result, String validate, String msg) {
                     }
@@ -319,8 +321,8 @@ public interface CaptchaListener {
     /**
      * 验证之后结果 validate 不为空则验证通过
      * @param result 结果
-     * @param validate 状态码
-     * @param msg 信息
+     * @param validate 检验码
+     * @param msg 结果信息，包括验证错误信息
      */
     void onValidate(String result, String validate, String msg);
 
@@ -338,10 +340,13 @@ public interface CaptchaListener {
      */
     void onClose(Captcha.CloseType closeType);
     /**
-     * 验证码弹窗回调
-     * 正常情况下无需实现
+     * 验证码弹窗显示回调
      */
     void onCaptchaShow();
+    /**
+     * 验证码弹窗ui显示回调
+     */
+    void onCaptchaVisible();
 }
 ```
 
