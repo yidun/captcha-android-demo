@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.5.2'
+implementation 'io.github.yidun:captcha:3.5.3'
 ```
 ### 本地手动依赖
 
@@ -64,7 +64,7 @@ dependencies {
 
 ### 混淆配置
 
-在 proguard-rules.pro 文件中添加如下混淆规则
+在 proguard-rules.pro 文件中添加如下混淆规则（从 3.5.1 版本开始可以不用配置）
 
 ```
 -keepattributes *Annotation*
@@ -78,7 +78,7 @@ dependencies {
 -keepclassmembers class * {
     @android.webkit.JavascriptInterface <methods>;
 }
-// 项目中使用了glide 4.9.0版本，注意一下glide的混淆规则
+// 项目中使用了 glide 4.9.0 版本，注意一下 glide 的混淆规则
 ```
 
 ## 快速调用示例
@@ -94,9 +94,6 @@ public class DemoActivity extends AppCompatActivity {
                 listener(new CaptchaListener() {
                     @Override
                     public void onCaptchaShow() {
-                    }
-                    @Override
-                    public void onCaptchaVisible() {
                     }
                     @Override
                     public void onValidate(String result, String validate, String msg) {
@@ -173,6 +170,9 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | canUpload | canUpload:boolean | 否 | true | 是否支持数据上报和崩溃收集 |
 
 高级ui配置
+
+<img src="https://github.com/yidun/captcha-android-demo/tree/master/screenshots/Popup.jpg" width="300" height="530">
+<img src="https://github.com/yidun/captcha-android-demo/tree/master/screenshots/Custom.jpg" width="300" height="530">
 
 | 配置项 |参数/类型|是否必须|默认值|描述|
 |----|----|--------|------|----|
@@ -343,10 +343,6 @@ public interface CaptchaListener {
      * 验证码弹窗显示回调
      */
     void onCaptchaShow();
-    /**
-     * 验证码弹窗ui显示回调
-     */
-    void onCaptchaVisible();
 }
 ```
 
@@ -377,7 +373,7 @@ public enum CloseType {
 
 ##### ⚠️注意
 
-从Android 9.0开始Webview默认不支持http资源，若私有化配置是http资源需要在Manifest添加如下配置
+从 Android 9.0 开始 webView 默认不支持 http 资源，若私有化配置是 http 资源需要在 Manifest 添加如下配置
 
 ```
  <application
