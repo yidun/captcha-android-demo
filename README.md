@@ -171,8 +171,8 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 
 高级ui配置
 
-<img src="https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Popup.jpg" width="300" height="530">
-<img src="https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Custom.jpg" width="300" height="530">
+<img src="https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Popup.png" width="300" height="530">
+<img src="https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Custom.png" width="300" height="530">
 
 | 配置项 |参数/类型|是否必须|默认值|描述|
 |----|----|--------|------|----|
