@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.5.3'
+implementation 'io.github.yidun:captcha:3.5.4'
 ```
 ### 本地手动依赖
 
@@ -168,6 +168,8 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | staticServer | staticServer:String | 否 | 无 | 私有化资源域名，私有化部署必须，协议需要和protocol对应 |
 | isShowInnerClose | isShowInnerClose:boolean | 否 | false | 是否显示验证码内部关闭按钮 |
 | canUpload | canUpload:boolean | 否 | true | 是否支持数据上报和崩溃收集 |
+| keyCodeBackEnable | isKeyCodeBackEnable:boolean | 否 | true | 弹窗物理返回键是否可用 |
+| setDialogStyle | dialogStyle:String | 否 | 无 | 自定义弹窗主题，这里设置主题名 |
 
 高级ui配置
 
