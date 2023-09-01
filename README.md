@@ -406,7 +406,7 @@ captcha.validate()
 captcha.changeDialogLayout()
 ```
 
-### 5. 释放验证码相关资源（建议放在Activity的onDestroy，智能无感知必须）
+### 5. 释放验证码相关资源（建议放在Activity的onDestroy，必须调用）
 
 #### 代码说明
 
