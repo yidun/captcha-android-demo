@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.5.4'
+implementation 'io.github.yidun:captcha:3.5.5'
 ```
 ### 本地手动依赖
 
@@ -321,7 +321,7 @@ public enum LangType {
 ```
 public interface CaptchaListener {
     /**
-     * 验证之后结果 validate 不为空则验证通过
+     * 验证之后结果回调 validate 不为空则验证通过
      * @param result 结果
      * @param validate 检验码
      * @param msg 结果信息，包括验证错误信息
@@ -353,7 +353,7 @@ public interface CaptchaListener {
 ```
 public enum CloseType {
         /**
-         * 用户主动关闭
+         * 用户主动关闭验证码弹窗
          */
         USER_CLOSE,
         /**
@@ -362,7 +362,7 @@ public enum CloseType {
         VERIFY_SUCCESS_CLOSE,
 
         /**
-         * loading关闭
+         * loading或者错误弹窗关闭
          */
         TIP_CLOSE,
         
