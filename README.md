@@ -79,6 +79,13 @@ dependencies {
     @android.webkit.JavascriptInterface <methods>;
 }
 // 项目中使用了 glide 4.9.0 版本，注意一下 glide 的混淆规则
+-dontwarn com.bumptech.glide.**
+-keep class com.bumptech.glide.**{*;}
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
 ```
 
 ## 快速调用示例
@@ -146,7 +153,7 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | timeout | timeout:long | 否 | 10s | 超时时间，单位ms |
 | backgroundDimAmount | amount:float | 否 | 0.5 | 验证码框遮罩层透明度 |
 | controlBarImageUrl | startIconUrl:String,movingIconUrl:String,errorIconUrl:String | 否 | 无 | 验证码控制条的滑块的图片 |
-| position | xCoordinate:int,yCoordinate:int | 否 | -1，-1 | 验证码弹窗位置 |
+| position | xCoordinate:int,yCoordinate:int | 否 | -1，-1 | 验证码弹窗位置/已废弃 |
 | debug | isEnableDebug:boolean | 否 | false | 是否启用debug模式 |
 | languageType | langType:LangType | 否 | 系统语言 | 语言类型：枚举值 |
 | theme | theme:Theme | 否 | Theme.LIGHT | 主题 |
@@ -171,10 +178,84 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | keyCodeBackEnable | isKeyCodeBackEnable:boolean | 否 | true | 弹窗物理返回键是否可用 |
 | setDialogStyle | dialogStyle:String | 否 | 无 | 自定义弹窗主题，这里设置主题名 |
 
-高级ui配置
+高级 ui 配置
 
 <img src="https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Popup.png">
 <img src="https://github.com/yidun/captcha-android-demo/blob/master/screenshots/Custom.png">
+
+从 3.5.7 版本开始高级 ui 用 json 字符串来设置
+| 配置项 |参数/类型|是否必须|默认值|描述|
+|----|----|--------|------|----|
+| setUiParams | uiParamsJson:String | 否 | 无 | 高级 ui json字符串 |
+
+json 字段支持范围如下
+
+```
+{
+   "customStyles":{
+       "imagePanel":{
+           "align":"top", // 仅在 float 模式下有效，可选项为 top 和 bottom，指定 imagePanel 出现在 controlBar 上方还是下方
+           "borderRadius":"2px", // 边框圆角大小，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em、%
+           "loadBackgroundImage":"xxx", // 加载中时的背景图片地址，v2.21.4 后新增，需要填入一个 url
+           "loadBackgroundColor" :"#f00"  // 加载中时的背景颜色，v2.21.4 后新增，支持 CSS 所有颜色值
+       },
+       "controlBar":{
+          "height": "40px", // 高度，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em，不支持 %，会影响功能
+          "borderRadius": "20px", // 边框圆角大小，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em、%
+          "paddingLeft": "40px", // 左边距，如果相对于整个 bar 居中提示文字，设为 0； v2.21.4 后新增，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、%，不支持 em，会影响功能
+          "borderColor": "transparent", // 边框颜色，支持 CSS 所有颜色值
+          "background": "#e1c1ff", // 背景颜色，占满整个 controlBar，支持 CSS 所有颜色值
+          "borderColorMoving": "#0000ff", // 滑动时已滑动区域边框、滑块颜色，仅在滑动类型验证码下有效，支持 CSS 所有颜色值
+          "backgroundMoving": "rgba(0, 0, 255, 0.1)", // 滑动时已滑动区域背景颜色，仅在滑动类型验证码下有效，支持 CSS 所有颜色值
+          "borderColorSuccess": "#00ff00", // 验证成功时边框、文字、滑块背景颜色，如果是滑动，已滑动区域有效，支持 CSS 所有颜色值
+          "backgroundSuccess": "rgba(0, 255, 0, 0.1)", // 验证成功时背景颜色，如果是滑动，已滑动区域有效，支持 CSS 所有颜色值
+          "borderColorError": "#ff0000", // 验证失败时边框、文字、滑块背景颜色，如果是滑动，已滑动区域有效，支持 CSS 所有颜色值
+          "backgroundError": "rgba(255, 0, 0, 0.1)", // 验证失败时背景颜色，如果是滑动，已滑动区域有效，支持 CSS 所有颜色值
+          "slideBackground": "#fff", // 滑块滑动前背景颜色，支持 CSS 所有颜色值
+          "textSize": "14px", // 滑块内文本大小，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem，不支持 em、%，会影响功能
+          "textColor": "orange", // 滑块内文本颜色（滑块滑动前、失败、成功前的颜色），支持 CSS 所有颜色值
+          "slideIcon": "", // 滑块滑动前 iocn，需要是一个 url，如果未提供则按照默认icon显示
+          "slideIconMoving": "", // 滑块滑动过程 iocn，需要一个 url，如果未提供则按照默认 icon 显示
+          "slideIconSuccess": "", // 滑块验证成功时 iocn，需要一个 url，如果未提供则按照默认 icon 显示
+          "slideIconError": "" // 滑块验证失败时 iocn，需要一个 url，如果未提供则按照默认 icon 显示                          
+       },
+        "icon": {
+          "intellisenseLogo": "" // 智能无感知的 icon，需要一个 url，如果未提供则按照默认 icon 显示
+       },
+        "gap": "30px", // imagePanel 相对 controlBar 的间距大小，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em、%
+        "executeBorderRadius": "4px", // imagePanel 右边顶部的操作按钮最外层容器圆角大小，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em、%
+        "executeBackground": "rgba(0, 0, 0, 0.2)", // imagePanel 右边顶部的操作按钮最外层容器背景颜色，支持 CSS 所有颜色值
+        "executeTop": "4px", // imagePanel 右边顶部的操作按钮最外层容器顶部距离，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em、%
+        "executeRight": "4px" // imagePanel 右边顶部的操作按钮最外层容器右侧距离，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em、%
+   }，
+   "popupStyles":{
+        "width": "350px", // 宽度，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、%，v2.21.4 后支持 rem、em
+        "capBarHeight": "50px", // 弹框头部标题所在容器高度，当传入数字时，默认单位 px；当传入字符串时，支持单位 px，v2.21.4 后支持 rem；不支持 %、em，会影响功能
+        "capBarTextAlign": "left", // 弹框头部标题文字对齐方式，可选值为 left、center、right
+        "capBarBorderColor": "#fff",  // 弹框头部标题下边框颜色，想要去掉的话可取 transparent 或者与背景色同色，支持 CSS 所有颜色值
+        "capBarTextColor": "#333", // 弹框头部标题文字颜色，支持 CSS 所有颜色值
+        "capBarTextSize": 14, // 弹框头部标题文字字体大小，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px、rem；不支持 %、em，会影响功能
+        "capBarTextWeight": 600, // 弹框头部标题文字字体体重，可设置粗细，也就是 css 样式的 font-weight 属性
+        "capPadding": 15, //  弹框 imagePanel 与外边框距离，相当于总体设置 capPaddingTop，capPaddingRight，capPaddingBottom，capPaddingLeft，当传入数字时，默认单位 px；当传入字符串时，支持单位 px；不支持 %、rem，em，如果传入的单位是 %、rem、em 时，保留数字并强转为 px 单位
+        "capPaddingTop": 0, // 弹框 imagePanel 与上外边框距离，会覆盖 capPadding 上边距，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px，如果传入的单位是 %、rem、em 时，保留数字并强转为 px 单位
+        "capPaddingRight": 15, // 弹框 imagePanel 与右外边框距离，会覆盖 capPadding 右边距，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px，如果传入的单位是 %、rem、em 时，保留数字并强转为 px 单位
+        "capPaddingBottom": 0, // 弹框 imagePanel 与下外边框距离，会覆盖 capPadding 下边距，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px，如果传入的单位是 %、rem、em 时，保留数字并强转为 px 单位
+        "capPaddingLeft": 15, // 弹框 imagePanel 与左外边框距离，会覆盖 capPadding 左边距，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px，如果传入的单位是 %、rem、em 时，保留数字并强转为 px 单位
+        "opacity": 0.1, // 弹框遮罩层透明度,0 ~ 1 之间的数字
+        "radius": 20, // 弹框最外层容器圆角，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px、%、rem，em
+        "borderColor": "transparent", // 弹框最外层容器边框颜色，想要去掉的话可取 transparent 或者与背景色同色，支持 CSS 所有颜色值
+        "paddingTop": 20, // 弹框最外层容器上内边距，实践时可与 capPaddingTop 配合，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px、%、rem，em
+        "paddingBottom": 40, // 弹框最外层容器下内边距，实践时候可与 capPaddingBottom 配合，当传入数字时，默认单位 px；v2.21.4 后支持字符串，单位 px、%、rem，em
+        "position": "absolute", // 弹框的 css 定位，可填 absolute、fixed、static 等，默认时 absolute
+        "top": "20%" // 弹框相对顶部的位置，也就是 css 样式的 top 属性   
+   }，
+   "customTexts":{
+        "slideTip": "向右拖动滑块填充拼图" // 滑动模块文案      
+   }
+}
+```
+
+3.5.7 版本以下沿用如下配置项
 
 | 配置项 |参数/类型|是否必须|默认值|描述|
 |----|----|--------|------|----|
