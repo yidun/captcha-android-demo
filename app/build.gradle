@@ -37,7 +37,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.5.1'
     implementation 'androidx.preference:preference:1.2.0'
     testImplementation 'junit:junit:4.13.2'
-    implementation "io.github.yidun:captcha:3.4.8"
+    implementation "io.github.yidun:captcha:3.5.5"
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.okhttp3:okhttp:4.9.2'
     implementation 'androidx.multidex:multidex:2.0.1'
