@@ -39,7 +39,7 @@ implementation 'io.github.yidun:captcha:3.5.6.1'
 
 #### 获取 SDK 
 
-从易盾官网下载号码认证 sdk 的 aar 包 [包地址](https://github.com/yidun/captcha-android-demo/tree/master/sdk)
+从易盾官网下载验证码 sdk 的 aar 包 [包地址](https://github.com/yidun/captcha-android-demo/tree/master/sdk)
 
 #### 添加 aar 包依赖
 
