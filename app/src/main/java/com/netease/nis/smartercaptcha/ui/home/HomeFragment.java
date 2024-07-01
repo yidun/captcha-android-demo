@@ -21,16 +21,14 @@ import com.netease.nis.captcha.Captcha;
 import com.netease.nis.captcha.CaptchaConfiguration;
 import com.netease.nis.captcha.CaptchaListener;
 import com.netease.nis.smartercaptcha.R;
-import com.netease.nis.smartercaptcha.bean.CustomStyleBean;
-import com.netease.nis.smartercaptcha.bean.PopupStyleBean;
 import com.netease.nis.smartercaptcha.utils.HttpUtil;
 import com.netease.nis.smartercaptcha.utils.LanguageTools;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author liuxiaoshuai
@@ -42,7 +40,6 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "Captcha";
     private Captcha captcha;
     private final String captchaId = "易盾业务id";
-    private final Gson gson = new Gson();
     private String validate;
     private String apiServer;
     private String demoServer;
@@ -135,53 +132,19 @@ public class HomeFragment extends Fragment {
 
         try {
             if (preferences.getBoolean("settings_switch_super", false)) {
-                CustomStyleBean customStyleBean = gson.fromJson(preferences.getString("settings_super_custom", ""), CustomStyleBean.class);
-                PopupStyleBean popupStyleBean = gson.fromJson(preferences.getString("settings_super_popup", ""), PopupStyleBean.class);
-
-                if (customStyleBean != null) {
-                    if (customStyleBean.imagePanel != null) {
-                        builder.setImagePanelAlign(customStyleBean.imagePanel.align)
-                                .setImagePanelBorderRadius(customStyleBean.imagePanel.borderRadius);
-                    }
-                    if (customStyleBean.controlBar != null) {
-                        builder.setControlBarHeight(customStyleBean.controlBar.height)
-                                .setControlBarBorderRadius(customStyleBean.controlBar.borderRadius)
-                                .setControlBarBorderColor(customStyleBean.controlBar.borderColor)
-                                .setControlBarBackground(customStyleBean.controlBar.background)
-                                .setControlBarBorderColorMoving(customStyleBean.controlBar.borderColorMoving)
-                                .setControlBarBackgroundMoving(customStyleBean.controlBar.backgroundMoving)
-                                .setControlBarBorderColorSuccess(customStyleBean.controlBar.borderColorSuccess)
-                                .setControlBarBackgroundSuccess(customStyleBean.controlBar.backgroundSuccess)
-                                .setControlBarBorderColorError(customStyleBean.controlBar.borderColorError)
-                                .setControlBarBackgroundError(customStyleBean.controlBar.backgroundError)
-                                .setControlBarSlideBackground(customStyleBean.controlBar.slideBackground)
-                                .setControlBarTextSize(customStyleBean.controlBar.textSize)
-                                .setControlBarTextColor(customStyleBean.controlBar.textColor)
-                        ;
-                    }
-                    builder.setGap(customStyleBean.gap)
-                            .setExecuteBorderRadius(customStyleBean.executeBorderRadius)
-                            .setExecuteBackground(customStyleBean.executeBackground)
-                            .setExecuteTop(customStyleBean.executeTop)
-                            .setExecuteRight(customStyleBean.executeRight);
+                JSONObject jsonObject = new JSONObject();
+                if (!TextUtils.isEmpty(preferences.getString("settings_super_custom", ""))) {
+                    jsonObject.put("customStyles",
+                            new JSONObject(preferences.getString("settings_super_custom", "")));
                 }
 
-                if (popupStyleBean != null) {
-                    builder.setCapBarHeight(popupStyleBean.capBarHeight)
-                            .setCapBarTextAlign(popupStyleBean.capBarTextAlign)
-                            .setCapBarBorderColor(popupStyleBean.capBarBorderColor)
-                            .setCapBarTextColor(popupStyleBean.capBarTextColor)
-                            .setCapBarTextSize(popupStyleBean.capBarTextSize)
-                            .setCapBarTextWeight(popupStyleBean.capBarTextWeight)
-                            .setCapPadding(popupStyleBean.capPadding)
-                            .setCapPaddingBottom(popupStyleBean.capPaddingBottom)
-                            .setCapPaddingTop(popupStyleBean.capPaddingTop)
-                            .setCapPaddingRight(popupStyleBean.capPaddingRight)
-                            .setCapPaddingLeft(popupStyleBean.capPaddingLeft)
-                            .setOpacity(popupStyleBean.opacity)
-                            .setRadius(popupStyleBean.radius)
-                            .setPaddingTop(popupStyleBean.paddingTop)
-                            .setPaddingBottom(popupStyleBean.paddingBottom);
+                if (!TextUtils.isEmpty(preferences.getString("settings_super_popup", ""))) {
+                    jsonObject.put("popupStyles",
+                            new JSONObject(preferences.getString("settings_super_popup", "")));
+                }
+
+                if (!TextUtils.isEmpty(jsonObject.toString())) {
+                    builder.setUiParams(jsonObject.toString());
                 }
             }
 

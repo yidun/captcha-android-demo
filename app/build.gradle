@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.netease.nis.smartercaptcha"
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -37,7 +38,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.5.1'
     implementation 'androidx.preference:preference:1.2.0'
     testImplementation 'junit:junit:4.13.2'
-    implementation "io.github.yidun:captcha:3.5.5"
+    implementation "io.github.yidun:captcha:3.5.9.1"
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.okhttp3:okhttp:4.9.2'
     implementation 'androidx.multidex:multidex:2.0.1'
