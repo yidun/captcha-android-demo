@@ -156,7 +156,7 @@ public class HomeFragment extends Fragment {
         builder.listener(new CaptchaListener() {
 
             @Override
-            public void onValidate(String result, String validate, String msg) {
+            public void onValidate(String result, String validate, String msg, String captchaType) {
                 HomeFragment.this.validate = validate;
                 Log.i(TAG, "验证成功: 校验码" + validate + " 错误信息:" + msg);
             }
