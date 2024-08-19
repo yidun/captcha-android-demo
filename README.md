@@ -215,10 +215,10 @@ json 字段支持范围如下
           "slideBackground": "#fff", // 滑块滑动前背景颜色，支持 CSS 所有颜色值
           "textSize": "14px", // 滑块内文本大小，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem，不支持 em、%，会影响功能
           "textColor": "orange", // 滑块内文本颜色（滑块滑动前、失败、成功前的颜色），支持 CSS 所有颜色值
-          "slideIcon": "", // 滑块滑动前 iocn，需要是一个 url，如果未提供则按照默认icon显示
-          "slideIconMoving": "", // 滑块滑动过程 iocn，需要一个 url，如果未提供则按照默认 icon 显示
-          "slideIconSuccess": "", // 滑块验证成功时 iocn，需要一个 url，如果未提供则按照默认 icon 显示
-          "slideIconError": "" // 滑块验证失败时 iocn，需要一个 url，如果未提供则按照默认 icon 显示                          
+          "slideIcon": "", // 滑块滑动前 icon，需要是一个 url，如果未提供则按照默认icon显示
+          "slideIconMoving": "", // 滑块滑动过程 icon，需要一个 url，如果未提供则按照默认 icon 显示
+          "slideIconSuccess": "", // 滑块验证成功时 icon，需要一个 url，如果未提供则按照默认 icon 显示
+          "slideIconError": "" // 滑块验证失败时 icon，需要一个 url，如果未提供则按照默认 icon 显示                          
        },
         "icon": {
           "intellisenseLogo": "" // 智能无感知的 icon，需要一个 url，如果未提供则按照默认 icon 显示
@@ -230,7 +230,6 @@ json 字段支持范围如下
         "executeRight": "4px" // imagePanel 右边顶部的操作按钮最外层容器右侧距离，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、rem、em、%
    }，
    "popupStyles":{
-        "width": "350px", // 宽度，当传入数字时，默认单位 px；当传入字符串时，支持单位 px、%，v2.21.4 后支持 rem、em
         "capBarHeight": "50px", // 弹框头部标题所在容器高度，当传入数字时，默认单位 px；当传入字符串时，支持单位 px，v2.21.4 后支持 rem；不支持 %、em，会影响功能
         "capBarTextAlign": "left", // 弹框头部标题文字对齐方式，可选值为 left、center、right
         "capBarBorderColor": "#fff",  // 弹框头部标题下边框颜色，想要去掉的话可取 transparent 或者与背景色同色，支持 CSS 所有颜色值
