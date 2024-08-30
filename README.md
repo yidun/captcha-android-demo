@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.6.0'
+implementation 'io.github.yidun:captcha:3.6.1'
 ```
 ### 本地手动依赖
 
@@ -103,7 +103,7 @@ public class DemoActivity extends AppCompatActivity {
                     public void onCaptchaShow() {
                     }
                     @Override
-                    public void onValidate(String result, String validate, String msg, String captchaType) {
+                    public void onValidate(String result, String validate, String msg, String captchaType, String errorValidate) {
                     }
 
                     @Override
@@ -300,6 +300,7 @@ json 字段支持范围如下
 | setSlideTip | slideTip:String | 否 | 无 | 滑动模块文案 |
 | setRefreshInterval | refreshInterval:int | 否 | 300 | 错误提示时长/ms |
 | isDisableFocus | disableFocus:boolean | 否 | false | input focus状态是否高亮 |
+| setUser | user:String | 否 | 无 | 用户标识 |
 
 ##### Theme 枚举类说明
 
@@ -411,8 +412,9 @@ public interface CaptchaListener {
      avoid：躲避障碍验证码 icon_point：图标点选验证码
      word_group：词组验证码 inference：图片推理验证码
      word_order：语序选词验证码 space：空间推理验证码 voice：语音验证码）
+     * @param errorValidate 错误校验码，用于二次校验查看本次错误原因
      */
-    void onValidate(String result, String validate, String msg, String captchaType);
+    void onValidate(String result, String validate, String msg, String captchaType, String errorValidate);
 
     /**
      * 异常回调
