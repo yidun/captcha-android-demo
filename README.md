@@ -115,7 +115,8 @@ public class DemoActivity extends AppCompatActivity {
                     }
                 })
                 .build(this);
-        Captcha captcha = Captcha.getInstance().init(captchaConfiguration);
+        Captcha captcha = Captcha.getInstance();
+        captcha.init(captchaConfiguration);
         captcha.validate();
     }
 }
