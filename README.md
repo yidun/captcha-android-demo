@@ -55,8 +55,9 @@ android{
 }    
 
 dependencies {
-    implementation(name: 'captcha-release-3.2.4', ext: 'aar') // aar包版本以官网下载下来为准
-    implementation(name: 'base-core-1.0.3', ext: 'aar')
+    implementation(name: 'captcha-release-3.6.3', ext: 'aar') // aar包版本以官网下载下来为准
+    implementation(name: 'base-core-1.1.4', ext: 'aar')
+    implementation 'com.github.bumptech.glide:glide:4.9.0' // 项目中有则无需添加
 }
 ```
 
