@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.6.2'
+implementation 'io.github.yidun:captcha:3.6.3'
 ```
 ### 本地手动依赖
 
@@ -302,6 +302,7 @@ json 字段支持范围如下
 | setRefreshInterval | refreshInterval:int | 否 | 300 | 错误提示时长/ms |
 | isDisableFocus | disableFocus:boolean | 否 | false | input focus状态是否高亮 |
 | setUser | user:String | 否 | 无 | 用户标识 |
+| setCaptchaType | captchaType:CaptchaType | 否 | 无 | 验证码类型，可以修改业务id默认的类型 |
 
 ##### Theme 枚举类说明
 
@@ -399,6 +400,47 @@ public enum LangType {
         LANG_ZH_TW,//中国台湾
 }
 ```
+
+#### CaptchaType 枚举值说明
+```
+public enum CaptchaType {
+        DEFAULT(-1),
+        // 滑块拼图
+        JIGSAW(2),
+        // 文字点选
+        POINT(3),
+        // 短信上行
+        SMS(4),
+        // 智能无感知
+        INTELLISENSE(5),
+        // 障碍躲避
+        AVOID(6),
+        // 图标点选
+        ICON_POINT(7),
+        // 词组
+        WORD_GROUP(8),
+        // 图片推理
+        INFERENCE(9),
+        // 语序选词
+        WORD_ORDER(10),
+        // 空间推理
+        SPACE(11),
+        // 语音识别
+        VOICE(12);
+
+        private final int type;
+
+        CaptchaType(int type) {
+            this.type = type;
+        }
+
+        public int getType() {
+            return type;
+        }
+    }
+}
+```
+
 ##### CaptchaListener 接口说明
 
 ```
