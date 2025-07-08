@@ -33,7 +33,7 @@ allprojects {
 在对应 module 的 build.gradle 中添加依赖
 
 ```
-implementation 'io.github.yidun:captcha:3.6.3'
+implementation 'io.github.yidun:captcha:3.6.5'
 ```
 ### 本地手动依赖
 
@@ -494,10 +494,13 @@ public enum CloseType {
         VERIFY_SUCCESS_CLOSE,
 
         /**
-         * loading或者错误弹窗关闭
+         * loading自动关闭
          */
         TIP_CLOSE,
-        
+         /**
+         * loading或者错误弹窗手动关闭
+         */
+        TIP_CLOSE_USER,
          /**
          * 两次validate间隔少于一秒
          */
