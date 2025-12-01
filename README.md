@@ -179,6 +179,10 @@ CaptchaConfiguration 采用建造者模式，可配置项通过 CaptchaConfigura
 | disableReport | disableReport:boolean | 否 | false | 是否禁止数据上报和崩溃收集 |
 | keyCodeBackEnable | isKeyCodeBackEnable:boolean | 否 | true | 弹窗物理返回键是否可用 |
 | openPreLoad | isOpenPreLoad:boolean | 否 | false | 是否打开预加载，打开预加载可加快显示速度 |
+| setRefreshInterval | refreshInterval:int | 否 | 300 | 错误提示时长/ms |
+| isDisableFocus | disableFocus:boolean | 否 | false | input focus状态是否高亮 |
+| setUser | user:String | 否 | 无 | 用户标识 |
+| setCaptchaType | captchaType:CaptchaType | 否 | 无 | 验证码类型，可以修改业务id默认的类型 |
 | setDialogStyle | dialogStyle:String | 否 | 无 | 自定义弹窗主题，这里设置主题名 |
 
 高级 ui 配置
@@ -300,12 +304,8 @@ json 字段支持范围如下
 | setPaddingBottom | paddingBottom:int | 否 | 无 | 弹框【下】内边距，实践时候可与 capPaddingBottom 配合 |
 | setBorderColor | borderColor:String | 否 | 无 | 弹框外层容器颜色 |
 | setSlideTip | slideTip:String | 否 | 无 | 滑动模块文案 |
-| setRefreshInterval | refreshInterval:int | 否 | 300 | 错误提示时长/ms |
-| isDisableFocus | disableFocus:boolean | 否 | false | input focus状态是否高亮 |
-| setUser | user:String | 否 | 无 | 用户标识 |
-| setCaptchaType | captchaType:CaptchaType | 否 | 无 | 验证码类型，可以修改业务id默认的类型 |
 
-##### Theme 枚举类说明
+#### Theme 枚举类说明
 
 ```
     // 主题
